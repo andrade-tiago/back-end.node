@@ -1,0 +1,15 @@
+{
+  "name": "back-end.node",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "^22.0.1",
+    "typescript": "^5.8.3"
+  }
+}
