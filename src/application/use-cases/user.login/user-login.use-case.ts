@@ -5,13 +5,13 @@ import { IAuthService } from "@/domain/services/auth.service";
 import { InvalidDataError } from "@/domain/errors/invalid-data-error";
 import { IEmailFactory } from "@/application/factories/value-objects/email.factory";
 import { IUserRepository } from "@/domain/repositories/user.repository";
-import { ENV } from "env";
 
 export class UserLoginUseCase {
   constructor(
     private readonly _emailFactory: IEmailFactory,
     private readonly _userRepository: IUserRepository,
     private readonly _authService: IAuthService,
+    private readonly _ttlInSec: number,
   ) {}
 
   public async execute(input: UserLoginInput): Promise<string> {
@@ -30,7 +30,7 @@ export class UserLoginUseCase {
     const payload = new TokenPayload({
       sub: user.id,
       email: user.email,
-      ttlInSec: ENV.ACCESS_TOKEN_TTL,
+      ttlInSec: this._ttlInSec,
     });
     return await this._authService.generateToken(payload);
   }
