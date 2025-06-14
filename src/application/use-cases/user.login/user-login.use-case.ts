@@ -1,16 +1,17 @@
-import { UserLoginInput } from "./user-login.input";
-import { ErrorMessages } from "@/domain/constants/error-messages";
-import { TokenPayload } from "@/domain/value-objects/token-payload.vo";
-import { IAuthService } from "@/domain/services/auth.service";
-import { InvalidDataError } from "@/domain/errors/invalid-data-error";
 import { IEmailFactory } from "@/application/factories/value-objects/email.factory";
-import { IUserRepository } from "@/domain/repositories/user.repository";
+import { IAuthService } from "@/application/services/auth.service";
+import { IUserRepository } from "@/domain/entities/user/user.repository";
+import { UserLoginInput } from "./user-login.input";
+import { LoginError } from "@/application/errors/login-error";
+import { TokenPayload } from "@/domain/shared/value-objects/token-payload.vo";
+import { IHashService } from "@/application/services/hash.service";
 
 export class UserLoginUseCase {
   constructor(
     private readonly _emailFactory: IEmailFactory,
     private readonly _userRepository: IUserRepository,
     private readonly _authService: IAuthService,
+    private readonly _hashService: IHashService,
     private readonly _ttlInSec: number,
   ) {}
 
@@ -19,12 +20,12 @@ export class UserLoginUseCase {
     
     const user = await this._userRepository.findByEmail(userEmail);
     if (!user) {
-      throw new InvalidDataError(ErrorMessages.LoginError);
+      throw new LoginError();
     }
 
-    const passwordIsCorrect = await user.password.compareWith(input.password);
+    const passwordIsCorrect = await this._hashService.compare(input.password, user.password.value);
     if (!passwordIsCorrect) {
-      throw new InvalidDataError(ErrorMessages.LoginError);
+      throw new LoginError();
     }
 
     const payload = new TokenPayload({

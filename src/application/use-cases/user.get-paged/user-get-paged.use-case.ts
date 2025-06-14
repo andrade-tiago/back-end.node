@@ -1,4 +1,4 @@
-import { IUserRepository } from "@/domain/repositories/user.repository";
+import { IUserRepository } from "@/domain/entities/user/user.repository";
 import { UserOutput } from "../user.output";
 import { UserGetPagedInput } from "./user-get-paged.input";
 import { IUserMapper } from "@/application/mappers/user.mapper";

@@ -1,6 +1,5 @@
 export type ProductCreateInput = {
-  name: string;
-  description: string;
+  title: string;
   price: number;
-  stock: number;
+  inStock: number;
 }

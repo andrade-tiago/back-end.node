@@ -1,11 +1,10 @@
-import { ErrorMessages } from "@/domain/constants/error-messages";
-import { NotFoundError } from "@/domain/errors/not-found-error";
-import { IUserMapper } from "@/application/mappers/user.mapper";
-import { UserOutput } from "../user.output";
-import { Uuid } from "@/domain/value-objects/uuid.vo";
-import { ConflictError } from "@/domain/errors/conflict-error";
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
-import { IUserRepository } from "@/domain/repositories/user.repository";
+import { IUserMapper } from "@/application/mappers/user.mapper";
+import { IUserRepository } from "@/domain/entities/user/user.repository";
+import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
+import { UserOutput } from "../user.output";
+import { UserNotFoundError } from "@/application/errors/user-not-found.error";
+import { UserDeletedError } from "@/application/errors/user-deleted.error";
 import { DeletedUser } from "@/domain/entities/user";
 
 export class UserDeleteUseCase {
@@ -21,10 +20,10 @@ export class UserDeleteUseCase {
     const user = await this._userRepository.getById(userId);
 
     if (!user) {
-      throw new NotFoundError(ErrorMessages.UserNotFound);
+      throw new UserNotFoundError(userId);
     }
     if (!user.isActive()) {
-      throw new ConflictError(ErrorMessages.UserAlreadyDeleted);
+      throw new UserDeletedError(userId);
     }
 
     const deletedUser = DeletedUser.from(user);

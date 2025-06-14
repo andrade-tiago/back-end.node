@@ -1,9 +1,8 @@
 import { UserOutput } from "../user.output";
 import { IUserMapper } from "@/application/mappers/user.mapper";
-import { NotFoundError } from "@/domain/errors/not-found-error";
-import { ErrorMessages } from "@/domain/constants/error-messages";
-import { IUserRepository } from "@/domain/repositories/user.repository";
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
+import { IUserRepository } from "@/domain/entities/user/user.repository";
+import { UserNotFoundError } from "@/application/errors/user-not-found.error";
 
 export class UserGetByIdUseCase {
   constructor(
@@ -18,7 +17,7 @@ export class UserGetByIdUseCase {
     const user = await this._userRepository.getById(userId);
 
     if (!user) {
-      throw new NotFoundError(ErrorMessages.UserNotFound);
+      throw new UserNotFoundError(userId);
     }
 
     return this._userMapper.toOutput(user);

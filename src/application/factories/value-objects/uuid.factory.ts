@@ -1,4 +1,4 @@
-import { Uuid } from "@/domain/value-objects/uuid.vo";
+import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 
 export interface IUuidFactory {
   generate(): Uuid;

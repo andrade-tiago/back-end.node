@@ -1,4 +1,4 @@
-import { IProductRepository } from "@/domain/repositories/product.repository";
+import { IProductRepository } from "@/domain/entities/product/product.repository";
 import { ProductOutput } from "../product.output";
 import { ProductCreateInput } from "./product-create.input";
 import { IProductMapper } from "@/application/mappers/product.mapper";
@@ -13,10 +13,9 @@ export class ProductCreateUseCase {
 
   public async execute(data: ProductCreateInput): Promise<ProductOutput> {
     const newProduct = this._productFactory.create({
-      name: data.name,
-      description: data.description,
+      title: data.title,
       price: data.price,
-      stock: data.stock,
+      inStock: data.inStock,
     });
 
     await this._productRepository.add(newProduct);

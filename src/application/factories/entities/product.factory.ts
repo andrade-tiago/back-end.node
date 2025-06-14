@@ -2,10 +2,9 @@ import { Product } from "@/domain/entities/product";
 
 type ProductCreateProps = {
   id?: Product['id'] | Product['id']['value'];
-  name: Product['name'] | Product['name']['value'];
-  description: Product['description'] | Product['description']['value'];
-  price: Product['price'] | Product['price']['value'];
-  stock?: Product['stock'] | Product['stock']['value'];
+  title: Product['title'] | string;
+  price: Product['price'] | number;
+  inStock?: Product['inStock'] | number;
 }
 
 export interface IProductFactory {
