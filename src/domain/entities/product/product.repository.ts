@@ -2,7 +2,7 @@ import { Product } from ".";
 
 export interface IProductRepository {
   add(product: Product): Promise<void>;
-  getById(id: Product['id']): Promise<Product>;
+  getById(id: Product['id']): Promise<Product | undefined>;
   getPaged(options: ProductGetPagedOptions): Promise<Product[]>;
 }
 
