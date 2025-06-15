@@ -1,4 +1,4 @@
-import { ActiveUser, DeletedUser } from "@/domain/entities/user";
+import { ActiveUser, DeletedUser, UserRole } from "@/domain/entities/user";
 import { CPF } from "@/domain/entities/user/value-objects/cpf.vo";
 import { Email } from "@/domain/entities/user/value-objects/email.vo";
 import { Password } from "@/domain/entities/user/value-objects/password.vo";
@@ -13,6 +13,7 @@ type UserFactoryCreateProps = {
   email: Email | Email['value'];
   password: Password | Password['value'];
   createdAt?: NonFutureDate | Date | string | number;
+  role?: UserRole | string;
 }
 
 type UserFactoryAnonymousProps = {

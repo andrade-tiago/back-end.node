@@ -5,4 +5,5 @@ export type UserOutput = {
   email: string | null,
   createdAt: string,
   deletedAt: string | null,
+  role: string | null,
 }

@@ -30,6 +30,7 @@ export class UserCreateUseCase {
       email: userEmail,
       password: data.password,
       cpf: data.cpf,
+      role: data.role,
     });
 
     await this._userRepository.save(user);

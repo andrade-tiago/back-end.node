@@ -5,6 +5,11 @@ import { Email } from "./value-objects/email.vo";
 import { Password } from "./value-objects/password.vo";
 import { NonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo";
 
+export enum UserRole {
+  Admin = 'admin',
+  User = 'user',
+}
+
 type UserProps = {
   id: Uuid;
   createdAt?: NonFutureDate;
@@ -14,6 +19,7 @@ type ActiveUserProps = UserProps & {
   cpf: CPF;
   email: Email;
   password: Password;
+  role: UserRole;
 }
 type DeletedUserProps = UserProps & {
   deletedAt: NonFutureDate;
@@ -36,6 +42,7 @@ export class ActiveUser extends User {
   public readonly cpf: CPF;
   public readonly email: Email;
   public readonly password: Password;
+  public readonly role: UserRole;
 
   public constructor(props: ActiveUserProps) {
     super({
@@ -47,6 +54,7 @@ export class ActiveUser extends User {
     this.cpf = props.cpf;
     this.email = props.email;
     this.password = props.password;
+    this.role = props.role;
   }
 
   public isActive(): this is ActiveUser {
