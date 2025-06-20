@@ -23,8 +23,12 @@ export class Order {
     if (props.items.length === 0) {
       throw new EmptyOrderError();
     }
-    if (!Order.containsUniqueItems(props.items)) {
-      throw new DuplicateOrderItemsError();
+
+    {
+      const uniqueItemsCount = new Set(props.items.map(item => item.productId.value)).size;
+      if (uniqueItemsCount !== props.items.length) {
+        throw new DuplicateOrderItemsError();
+      }
     }
 
     this.id = props.id;
@@ -38,14 +42,5 @@ export class Order {
       (acc, item) => acc + (item.unitPrice.value * item.quantity.value), 0
     );
     return new Monetary(totalCost);
-  }
-
-  private static containsUniqueItems(items: OrderItem[]) {
-    const orderItemsMap = new Map<OrderItem['productId']['value'], number>();
-    items.forEach(item => {
-      orderItemsMap.set(item.productId.value, 0);
-    });
-
-    return orderItemsMap.size === items.length;
   }
 }
