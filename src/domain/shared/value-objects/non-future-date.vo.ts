@@ -1,4 +1,5 @@
-import { FutureDateError } from "@/domain/errors/future-date-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 
 export class NonFutureDate {
   public readonly value: number;
@@ -7,7 +8,7 @@ export class NonFutureDate {
     this.value = dateInMilliseconds;
   }
 
-  public static create(value?: number | Date | string): NonFutureDate {
+  public static create(value?: number | string | Date): NonFutureDate {
     if (value === undefined) {
       return NonFutureDate.now();
     }
@@ -16,7 +17,7 @@ export class NonFutureDate {
     const dateInMilliseconds = date.getTime();
 
     if (dateInMilliseconds > Date.now()) {
-      throw new FutureDateError(date);
+      throw new InvalidDataError(DomainErrorMessages.Date.FutureDate);
     }
     return new NonFutureDate(dateInMilliseconds);
   }

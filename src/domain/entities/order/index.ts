@@ -3,8 +3,8 @@ import { OrderItem } from "./value-objects/order-item.vo";
 import { User } from "../user";
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
-import { EmptyOrderError } from "@/domain/errors/empty-order.error";
-import { DuplicateOrderItemsError } from "@/domain/errors/duplicate-order-items.error";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 
 type OrderProps = {
   id: Uuid;
@@ -21,13 +21,13 @@ export class Order {
 
   public constructor(props: OrderProps) {
     if (props.items.length === 0) {
-      throw new EmptyOrderError();
+      throw new InvalidDataError(DomainErrorMessages.Order.Empty);
     }
 
     {
       const uniqueItemsCount = new Set(props.items.map(item => item.productId.value)).size;
       if (uniqueItemsCount !== props.items.length) {
-        throw new DuplicateOrderItemsError();
+        throw new InvalidDataError(DomainErrorMessages.Order.DuplicateItems);
       }
     }
 

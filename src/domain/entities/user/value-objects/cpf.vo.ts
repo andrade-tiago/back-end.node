@@ -1,4 +1,5 @@
-import { InvalidCpfError } from "@/domain/errors/invalid-cpf-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 
 export class CPF {
   private static readonly cpfRegex = /^\d{11}$/;
@@ -9,7 +10,7 @@ export class CPF {
     cpfStr = cpfStr.trim();
 
     if (!CPF.cpfRegex.test(cpfStr) || !CPF.hasValidNumbers(cpfStr)) {
-      throw new InvalidCpfError(cpfStr);
+      throw new InvalidDataError(DomainErrorMessages.User.InvalidCpf(cpfStr));
     }
 
     this.value = cpfStr;

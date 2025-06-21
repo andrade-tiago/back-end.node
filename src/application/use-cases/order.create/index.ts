@@ -3,11 +3,13 @@ import { OrderCreateInput } from "./order-create.input";
 import { IOrderMapper } from "@/application/mappers/order.mapper";
 import { IProductMapper } from "@/application/mappers/product.mapper";
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
-import { DuplicateItemsError } from "@/application/errors/duplicate-items.error";
 import { NotFoundError } from "@/application/errors/not-found.error";
 import { IOrderFactory } from "@/application/factories/entities/order.factory";
 import { IOrderRepository } from "@/domain/repositories/order.repository";
 import { IProductRepository } from "@/domain/repositories/product.repository";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { ApplicationErrorMessages } from "@/application/errors/_error-messages";
 
 export class OrderCreateUseCase {
   public constructor(
@@ -25,13 +27,13 @@ export class OrderCreateUseCase {
     {
       const uniqueIdsCount = new Set(data.itemIds).size;
       if (uniqueIdsCount !== productIds.length) {
-        throw new DuplicateItemsError('An order cannot contain duplicate products');
+        throw new InvalidDataError(DomainErrorMessages.Order.DuplicateItems);
       }
     }
 
     const products = await this._productRepository.getMany(productIds);
     if (products.length !== productIds.length) {
-      throw new NotFoundError('One or more products not found');
+      throw new NotFoundError(ApplicationErrorMessages.Products.NotFoundMany);
     }
 
     const orderItems = products.map(this._productMapper.toOrderItem);

@@ -1,4 +1,4 @@
-export abstract class DomainError extends Error {
+export abstract class AppError extends Error {  
   constructor(message: string) {
     super(message);
   }

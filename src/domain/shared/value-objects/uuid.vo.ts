@@ -1,4 +1,5 @@
-import { InvalidUuidError } from "@/domain/errors/invalid-uuid-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 
 export class Uuid {
   // ref: https://ihateregex.io/expr/uuid/
@@ -10,7 +11,7 @@ export class Uuid {
     uuidStr = uuidStr.trim();
 
     if (Uuid.regex.test(uuidStr)) {
-      throw new InvalidUuidError(uuidStr);
+      throw new InvalidDataError(DomainErrorMessages.InvalidUuid(uuidStr));
     }
     
     this.value = uuidStr;

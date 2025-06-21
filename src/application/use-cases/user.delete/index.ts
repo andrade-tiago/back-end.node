@@ -2,10 +2,11 @@ import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory
 import { IUserMapper } from "@/application/mappers/user.mapper";
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { UserOutput } from "../user.output";
-import { UserNotFoundError } from "@/application/errors/user-not-found.error";
-import { UserDeletedError } from "@/application/errors/user-deleted.error";
 import { DeletedUser } from "@/domain/entities/user";
 import { IUserRepository } from "@/domain/repositories/user.repository";
+import { NotFoundError } from "@/application/errors/not-found.error";
+import { ApplicationErrorMessages } from "@/application/errors/_error-messages";
+import { ConflictError } from "@/application/errors/conflict.error";
 
 export class UserDeleteUseCase {
   constructor(
@@ -20,10 +21,10 @@ export class UserDeleteUseCase {
     const user = await this._userRepository.getById(userId);
 
     if (!user) {
-      throw new UserNotFoundError(userId);
+      throw new NotFoundError(ApplicationErrorMessages.User.NotFoundById(userId.value));
     }
     if (!user.isActive()) {
-      throw new UserDeletedError(userId);
+      throw new ConflictError(ApplicationErrorMessages.User.AlreadyDeleted(userId.value));
     }
 
     const deletedUser = DeletedUser.from(user);

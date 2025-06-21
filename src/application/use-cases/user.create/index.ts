@@ -3,8 +3,9 @@ import { UserOutput } from "../user.output";
 import { IUserFactory } from "@/application/factories/entities/user.factory";
 import { IEmailFactory } from "@/application/factories/value-objects/email.factory";
 import { IUserMapper } from "@/application/mappers/user.mapper";
-import { ExistingUserError } from "@/application/errors/existing-user-error";
 import { IUserRepository } from "@/domain/repositories/user.repository";
+import { ConflictError } from "@/application/errors/conflict.error";
+import { ApplicationErrorMessages } from "@/application/errors/_error-messages";
 
 export class UserCreateUseCase {
   constructor(
@@ -21,7 +22,7 @@ export class UserCreateUseCase {
       const emailIsAlreadyInUse = await this._userRepository.containsUserWithEmail(userEmail);
 
       if (emailIsAlreadyInUse) {
-        throw new ExistingUserError(userEmail);
+        throw new ConflictError(ApplicationErrorMessages.User.Conflict(userEmail.value));
       }
     }
 

@@ -1,4 +1,5 @@
-import { InvalidEmailError } from "@/domain/errors/invalid-email-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 
 export class Email {
   // ref: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
@@ -11,7 +12,7 @@ export class Email {
     emailStr = emailStr.trim();
 
     if (!Email.emailRegex.test(emailStr)) {
-      throw new InvalidEmailError(emailStr);
+      throw new InvalidDataError(DomainErrorMessages.User.InvalidEmail(emailStr));
     }
 
     this.value = emailStr;

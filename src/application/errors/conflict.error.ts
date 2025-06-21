@@ -1,6 +1,6 @@
 import { AppError } from "@/domain/errors/_app-error";
 
-export class NotFoundError extends AppError {
+export class ConflictError extends AppError {
   public constructor(message: string) {
     super(message);
   }

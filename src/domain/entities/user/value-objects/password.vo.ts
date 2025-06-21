@@ -1,4 +1,5 @@
-import { NonEncryptedStringError } from "@/domain/errors/non-encrypted-string-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InternalError } from "@/domain/errors/internal-error.error";
 
 export class Password {
   // Bcrypt hash string
@@ -10,7 +11,7 @@ export class Password {
     hashedPasswordStr = hashedPasswordStr.trim();
 
     if (Password.encryptedStringRegex.test(hashedPasswordStr)) {
-      throw new NonEncryptedStringError(hashedPasswordStr);
+      throw new InternalError(DomainErrorMessages.NonEncryptedString(hashedPasswordStr));
     }
 
     this.value = hashedPasswordStr;

@@ -1,5 +1,5 @@
-import { NegativeValueError } from "@/domain/errors/negative-value-error";
-import { NonNumericValueError } from "@/domain/errors/non-numeric-value-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 import { valueIsNumeric } from "@/shared/utils/value-is-numeric";
 
 export class Monetary {
@@ -7,10 +7,10 @@ export class Monetary {
 
   public constructor(value: number) {
     if (!valueIsNumeric(value)) {
-      throw new NonNumericValueError(value);
+      throw new InvalidDataError(DomainErrorMessages.Number.NonNumeric);
     }
     if (value < 0) {
-      throw new NegativeValueError(value);
+      throw new InvalidDataError(DomainErrorMessages.Number.Negative);
     }
     const twoDecimalCasesFixedValue = Number(value.toFixed(2));
 

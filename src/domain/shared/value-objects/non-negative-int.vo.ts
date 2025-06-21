@@ -1,6 +1,5 @@
-import { NegativeValueError } from "@/domain/errors/negative-value-error";
-import { NonNumericValueError } from "@/domain/errors/non-numeric-value-error";
-import { NotIntegerValueError } from "@/domain/errors/not-integer-value-error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
+import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 import { valueIsNumeric } from "@/shared/utils/value-is-numeric";
 
 export class NonNegativeInt {
@@ -8,13 +7,13 @@ export class NonNegativeInt {
 
   constructor(value: number) {
     if (!valueIsNumeric(value)) {
-      throw new NonNumericValueError(value);
+      throw new InvalidDataError(DomainErrorMessages.Number.NonNumeric);
     }
     if (!Number.isInteger(value)) {
-      throw new NotIntegerValueError(value);
+      throw new InvalidDataError(DomainErrorMessages.Number.NonInteger);
     }
     if (value < 0) {
-      throw new NegativeValueError(value);
+      throw new InvalidDataError(DomainErrorMessages.Number.Negative);
     }
 
     this.value = value;

@@ -1,6 +1,6 @@
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
-import { ActiveUser, DeletedUser, User } from ".";
-import { Email } from "./value-objects/email.vo";
+import { ActiveUser, DeletedUser, User } from "../entities/user";
+import { Email } from "../entities/user/value-objects/email.vo";
 
 export interface IUserRepository {
   save(user: User): Promise<void>;
