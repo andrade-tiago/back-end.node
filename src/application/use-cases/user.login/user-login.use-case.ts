@@ -1,10 +1,10 @@
 import { IEmailFactory } from "@/application/factories/value-objects/email.factory";
 import { IAuthService } from "@/application/services/auth.service";
-import { IUserRepository } from "@/domain/entities/user/user.repository";
 import { UserLoginInput } from "./user-login.input";
 import { LoginError } from "@/application/errors/login-error";
 import { TokenPayload } from "@/domain/shared/value-objects/token-payload.vo";
 import { IHashService } from "@/application/services/hash.service";
+import { IUserRepository } from "@/domain/repositories/user.repository";
 
 export class UserLoginUseCase {
   constructor(

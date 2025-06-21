@@ -1,8 +1,8 @@
 import { UserOutput } from "../user.output";
 import { IUserMapper } from "@/application/mappers/user.mapper";
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
-import { IUserRepository } from "@/domain/entities/user/user.repository";
 import { UserNotFoundError } from "@/application/errors/user-not-found.error";
+import { IUserRepository } from "@/domain/repositories/user.repository";
 
 export class UserGetByIdUseCase {
   constructor(

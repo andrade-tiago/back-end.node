@@ -1,9 +1,9 @@
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { ProductOutput } from "../product.output";
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
-import { IProductRepository } from "@/domain/entities/product/product.repository";
 import { ProductNotFoundError } from "@/application/errors/product-not-found.error";
 import { IProductMapper } from "@/application/mappers/product.mapper";
+import { IProductRepository } from "@/domain/repositories/product.repository";
 
 export class ProductCreateUseCase {
   public constructor(

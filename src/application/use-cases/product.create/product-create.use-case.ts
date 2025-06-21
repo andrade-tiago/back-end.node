@@ -1,8 +1,8 @@
-import { IProductRepository } from "@/domain/entities/product/product.repository";
 import { ProductOutput } from "../product.output";
 import { ProductCreateInput } from "./product-create.input";
 import { IProductMapper } from "@/application/mappers/product.mapper";
 import { IProductFactory } from "@/application/factories/entities/product.factory";
+import { IProductRepository } from "@/domain/repositories/product.repository";
 
 export class ProductCreateUseCase {
   public constructor(

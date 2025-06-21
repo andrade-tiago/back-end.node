@@ -1,13 +1,13 @@
-import { IOrderRepository } from "@/domain/entities/order/order.repository";
 import { OrderOutput } from "../order.output";
 import { OrderCreateInput } from "./order-create.input";
 import { IOrderMapper } from "@/application/mappers/order.mapper";
 import { IProductMapper } from "@/application/mappers/product.mapper";
-import { IProductRepository } from "@/domain/entities/product/product.repository";
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
 import { DuplicateItemsError } from "@/application/errors/duplicate-items.error";
 import { NotFoundError } from "@/application/errors/not-found.error";
 import { IOrderFactory } from "@/application/factories/entities/order.factory";
+import { IOrderRepository } from "@/domain/repositories/order.repository";
+import { IProductRepository } from "@/domain/repositories/product.repository";
 
 export class OrderCreateUseCase {
   public constructor(

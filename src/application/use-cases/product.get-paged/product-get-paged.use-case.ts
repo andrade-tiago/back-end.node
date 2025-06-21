@@ -1,7 +1,7 @@
-import { IProductRepository } from "@/domain/entities/product/product.repository";
 import { ProductGetPagedInput } from "./product-get-paged.input";
 import { ProductOutput } from "../product.output";
 import { IProductMapper } from "@/application/mappers/product.mapper";
+import { IProductRepository } from "@/domain/repositories/product.repository";
 
 export class ProductGetPagedUseCase {
   public constructor(

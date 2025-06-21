@@ -2,9 +2,9 @@ import { UserCreateInput } from "./user-create.input";
 import { UserOutput } from "../user.output";
 import { IUserFactory } from "@/application/factories/entities/user.factory";
 import { IEmailFactory } from "@/application/factories/value-objects/email.factory";
-import { IUserRepository } from "@/domain/entities/user/user.repository";
 import { IUserMapper } from "@/application/mappers/user.mapper";
 import { ExistingUserError } from "@/application/errors/existing-user-error";
+import { IUserRepository } from "@/domain/repositories/user.repository";
 
 export class UserCreateUseCase {
   constructor(

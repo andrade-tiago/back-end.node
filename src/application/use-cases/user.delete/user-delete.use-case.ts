@@ -1,11 +1,11 @@
 import { IUuidFactory } from "@/application/factories/value-objects/uuid.factory";
 import { IUserMapper } from "@/application/mappers/user.mapper";
-import { IUserRepository } from "@/domain/entities/user/user.repository";
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { UserOutput } from "../user.output";
 import { UserNotFoundError } from "@/application/errors/user-not-found.error";
 import { UserDeletedError } from "@/application/errors/user-deleted.error";
 import { DeletedUser } from "@/domain/entities/user";
+import { IUserRepository } from "@/domain/repositories/user.repository";
 
 export class UserDeleteUseCase {
   constructor(
