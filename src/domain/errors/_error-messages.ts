@@ -6,6 +6,7 @@ export const DomainErrorMessages = {
   User: {
     InvalidCpf: (cpf: string) => `CPF "${cpf}" is invalid`,
     InvalidEmail: (email: string) => `E-mail "${email}" is invalid`,
+    InvalidRole: (role: string) => `"${role}" is an invalid role`,
   },
 
   NonEncryptedString: (str: string) => `Non encrypted string "${str}"`,

@@ -4,11 +4,7 @@ import { CPF } from "./value-objects/cpf.vo";
 import { Email } from "./value-objects/email.vo";
 import { Password } from "./value-objects/password.vo";
 import { NonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo";
-
-export enum UserRole {
-  Admin = 'admin',
-  User = 'user',
-}
+import { UserRole } from "./value-objects/user-role.vo";
 
 type UserProps = {
   id: Uuid;
@@ -22,7 +18,7 @@ type ActiveUserProps = UserProps & {
   role: UserRole;
 }
 type DeletedUserProps = UserProps & {
-  deletedAt: NonFutureDate;
+  deletedAt?: NonFutureDate;
 }
 
 export abstract class User {
@@ -71,13 +67,11 @@ export class DeletedUser extends User {
       createdAt: props.createdAt,
     });
 
-    this.deletedAt = props.deletedAt;
+    this.deletedAt = props.deletedAt ?? NonFutureDate.now();
   }
 
   public static from({ id, createdAt }: ActiveUser): DeletedUser {
-    const now = NonFutureDate.now();
-
-    return new DeletedUser({ id, createdAt, deletedAt: now });
+    return new DeletedUser({ id, createdAt });
   }
 
   public isActive(): this is ActiveUser {
