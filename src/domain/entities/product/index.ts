@@ -4,7 +4,7 @@ import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { ProductTitle } from "./value-objects/product-title.vo";
 import { NonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo";
 
-type ProductProps = {
+export type ProductProps = {
   id: Uuid;
   title: ProductTitle;
   price: Monetary;
