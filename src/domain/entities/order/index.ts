@@ -6,11 +6,11 @@ import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
 import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 
-type OrderProps = {
+export type OrderProps = {
   id: Uuid;
   userId: User['id'];
   items: OrderItem[];
-  createdAt: NonFutureDate;
+  createdAt?: NonFutureDate;
 }
 
 export class Order {
@@ -33,7 +33,7 @@ export class Order {
 
     this.id = props.id;
     this.userId = props.userId;
-    this.createdAt = props.createdAt;
+    this.createdAt = props.createdAt ?? NonFutureDate.now();
     this.items = props.items;
   }
 
