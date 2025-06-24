@@ -2,7 +2,7 @@ import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
 import { PositiveInt } from "@/domain/shared/value-objects/positive-int.vo";
 import { Product } from "../../product";
 
-type OrderItemProps = {
+export type OrderItemProps = {
   productId: Product['id'];
   unitPrice: Monetary;  
   quantity: PositiveInt;
