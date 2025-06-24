@@ -31,6 +31,7 @@ export abstract class User {
   }
 
   public abstract isActive(): this is ActiveUser;
+  public abstract isDeleted(): this is DeletedUser;
 }
 
 export class ActiveUser extends User {
@@ -56,6 +57,9 @@ export class ActiveUser extends User {
   public isActive(): this is ActiveUser {
     return true;
   }
+  public isDeleted(): this is DeletedUser {
+    return false;
+  }
 }
 
 export class DeletedUser extends User {
@@ -76,5 +80,8 @@ export class DeletedUser extends User {
 
   public isActive(): this is ActiveUser {
     return false;
+  }
+  public isDeleted(): this is DeletedUser {
+    return true;
   }
 }
