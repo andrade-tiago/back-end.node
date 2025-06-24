@@ -7,7 +7,7 @@ export class Password {
 
   public readonly value: string;
 
-  private constructor(hashedPasswordStr: string) {
+  public constructor(hashedPasswordStr: string) {
     hashedPasswordStr = hashedPasswordStr.trim();
 
     if (Password.encryptedStringRegex.test(hashedPasswordStr)) {
