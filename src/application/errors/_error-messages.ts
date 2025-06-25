@@ -8,6 +8,9 @@ export const ApplicationErrorMessages = {
     Conflict: (email: string) => `User with email "${email}" already exists`,
     NotFoundById: (id: string) => `User with id "${id}" not found`,
   },
+  Order: {
+    NotFoundById: (id: string) => `Order with id "${id}" not found`,
+  },
 
   Login: 'Incorrect e-mail or password (or both)',
 } as const;
