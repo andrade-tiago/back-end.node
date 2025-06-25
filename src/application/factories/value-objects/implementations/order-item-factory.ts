@@ -4,7 +4,7 @@ import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { IUuidFactory } from "../uuid.factory";
 import { IMonetaryFactory } from "../monetary.factory";
 import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
-import { IPositiveIntFactory } from "./positive-int.factory";
+import { IPositiveIntFactory } from "../positive-int.factory";
 import { PositiveInt } from "@/domain/shared/value-objects/positive-int.vo";
 
 export class OrderItemFactory implements IOrderItemFactory {
