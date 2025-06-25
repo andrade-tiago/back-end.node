@@ -1,5 +1,6 @@
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { valueIsNumeric } from "@/shared/utils/value-is-numeric";
 
 export class NonFutureDate {
   public readonly value: number;
@@ -16,6 +17,9 @@ export class NonFutureDate {
 
     const dateInMilliseconds = date.getTime();
 
+    if (!valueIsNumeric(dateInMilliseconds)) {
+      throw new InvalidDataError(DomainErrorMessages.Date.InvalidDate);
+    }
     if (dateInMilliseconds > Date.now()) {
       throw new InvalidDataError(DomainErrorMessages.Date.FutureDate);
     }
