@@ -2,15 +2,14 @@ import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 
 export class Uuid {
-  // ref: https://ihateregex.io/expr/uuid/
-  private static regex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/;
+  private static regex = /^[A-F0-9]{8}-[A-F0-9]{4}-4[A-F0-9]{3}-[89AB][A-F0-9]{3}-[A-F0-9]{12}$/i;
 
   public readonly value: string;
 
   public constructor(uuidStr: string) {
     uuidStr = uuidStr.trim();
 
-    if (Uuid.regex.test(uuidStr)) {
+    if (!Uuid.regex.test(uuidStr)) {
       throw new InvalidDataError(DomainErrorMessages.InvalidUuid(uuidStr));
     }
     
