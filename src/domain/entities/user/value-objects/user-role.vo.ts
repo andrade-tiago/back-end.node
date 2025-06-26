@@ -10,6 +10,8 @@ export class UserRole {
   public readonly value: UserRoleEnum;
 
   public constructor(roleStr: string) {
+    roleStr = roleStr.trim();
+
     if (!UserRole.isValid(roleStr)) {
       throw new InvalidDataError(DomainErrorMessages.User.InvalidRole(roleStr));
     }
@@ -17,6 +19,6 @@ export class UserRole {
   }
 
   private static isValid(value: string): value is UserRoleEnum {
-    return Object.values(UserRole).includes(value as UserRoleEnum);
+    return Object.values(UserRoleEnum).includes(value as UserRoleEnum);
   }
 }
