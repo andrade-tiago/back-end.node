@@ -16,26 +16,32 @@ export class CPF {
     this.value = cpfStr;
   }
 
-  // ref: https://www.calculadorafacil.com.br/computacao/validar-cpf
-  private static hasValidNumbers(cpfStr: string) {
+  private static hasValidNumbers(cpfStr: string): boolean {
     const cpfDigits: number[] = [...cpfStr].map(Number);
+    let sum: number;
 
-    let sum = 0;
-    for (let i = 0; i < 9; i++) {
-      sum += cpfDigits[i] * (i + 1);
+    {
+      sum = 0;
+      for (let i = 0; i < 9; i++) {
+        sum += cpfDigits[i] * (10 - i);
+      }
+      const firstCheckDigit = sum * 10 % 11 % 10;
+
+      if (firstCheckDigit !== cpfDigits[9]) {
+        return false;
+      }
     }
-    const firstCheckDigit = sum / 11 % 10;
-
-    if (firstCheckDigit !== cpfDigits[9]) {
-      return false;
+    {
+      sum = 0;
+      for (let i = 0; i < 10; i++) {
+        sum += cpfDigits[i] * (11 - i);
+      }
+      const secondCheckDigit = sum * 10 % 11 % 10;
+  
+      if (secondCheckDigit !== cpfDigits[10]) {
+        return false;
+      }
     }
-
-    sum = 0;
-    for (let i = 0; i < 10; i++) {
-      sum += cpfDigits[i] * i;
-    }
-    const secondCheckDigit = sum / 11 % 10;
-
-    return secondCheckDigit === cpfDigits[10];
+    return true;
   }
 } 
