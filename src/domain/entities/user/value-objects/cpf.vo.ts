@@ -7,7 +7,7 @@ export class CPF {
   public readonly value: string;
 
   constructor(cpfStr: string) {
-    cpfStr = cpfStr.trim();
+    cpfStr = cpfStr.trim().replaceAll(/[^0-9]/g, '');
 
     if (!CPF.cpfRegex.test(cpfStr) || !CPF.hasValidNumbers(cpfStr)) {
       throw new InvalidDataError(DomainErrorMessages.User.InvalidCpf(cpfStr));
