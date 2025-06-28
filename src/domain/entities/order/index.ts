@@ -33,7 +33,7 @@ export class Order {
 
     this.id = props.id;
     this.userId = props.userId;
-    this.createdAt = props.createdAt ?? NonFutureDate.now();
+    this.createdAt = props.createdAt ?? new NonFutureDate();
     this.items = props.items;
   }
 

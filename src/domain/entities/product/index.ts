@@ -24,6 +24,6 @@ export class Product {
     this.title = props.title;
     this.price = props.price;
     this.inStock = props.inStock ?? new NonNegativeInt(0);
-    this.createdAt = props.createdAt ?? NonFutureDate.now();
+    this.createdAt = props.createdAt ?? new NonFutureDate();
   }
 }

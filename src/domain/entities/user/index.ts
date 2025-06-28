@@ -27,7 +27,7 @@ export abstract class User {
 
   public constructor(props: UserProps) {
     this.id = props.id;
-    this.createdAt = props.createdAt ?? NonFutureDate.now();
+    this.createdAt = props.createdAt ?? new NonFutureDate();
   }
 
   public abstract isActive(): this is ActiveUser;
@@ -71,7 +71,7 @@ export class DeletedUser extends User {
       createdAt: props.createdAt,
     });
 
-    this.deletedAt = props.deletedAt ?? NonFutureDate.now();
+    this.deletedAt = props.deletedAt ?? new NonFutureDate();
   }
 
   public static from({ id, createdAt }: ActiveUser): DeletedUser {

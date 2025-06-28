@@ -33,7 +33,7 @@ export class OrderFactory implements IOrderFactory {
     if (datetime instanceof NonFutureDate || typeof datetime === 'undefined') {
       return datetime;
     }
-    return NonFutureDate.create(datetime);
+    return new NonFutureDate(datetime);
   }
   private resolveItems(items: OrderCreateData['items']): OrderProps['items'] {
     return items;
