@@ -1,5 +1,5 @@
 import { Order } from "@/domain/entities/order"
-import { OrderItem } from "@/domain/entities/order/value-objects/order-item.vo";
+import { OrderItem } from "@/domain/entities/order-item";
 
 export type OrderOutput = {
   id: Order['id']['value'];

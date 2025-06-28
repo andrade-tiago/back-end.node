@@ -1,6 +1,6 @@
 import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
 import { PositiveInt } from "@/domain/shared/value-objects/positive-int.vo";
-import { Product } from "../../product";
+import { Product } from "../product";
 
 export type OrderItemProps = {
   productId: Product['id'];

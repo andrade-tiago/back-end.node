@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { OrderItem } from "./order-item.vo";
+import { OrderItem } from ".";
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { PositiveInt } from "@/domain/shared/value-objects/positive-int.vo";
 import { Monetary } from "@/domain/shared/value-objects/monetary.vo";

@@ -1,11 +1,11 @@
-import { OrderItem, OrderItemProps } from "@/domain/entities/order/value-objects/order-item.vo";
 import { IOrderItemFactory, OrderItemFactoryCreate } from "../order-item.factory";
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
-import { IUuidFactory } from "../uuid.factory";
-import { IMonetaryFactory } from "../monetary.factory";
+import { IUuidFactory } from "../../value-objects/uuid.factory";
+import { IMonetaryFactory } from "../../value-objects/monetary.factory";
 import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
-import { IPositiveIntFactory } from "../positive-int.factory";
+import { IPositiveIntFactory } from "../../value-objects/positive-int.factory";
 import { PositiveInt } from "@/domain/shared/value-objects/positive-int.vo";
+import { OrderItem, OrderItemProps } from "@/domain/entities/order-item";
 
 export class OrderItemFactory implements IOrderItemFactory {
   public constructor(

@@ -1,4 +1,4 @@
-import { OrderItem, OrderItemProps } from "@/domain/entities/order/value-objects/order-item.vo";
+import { OrderItem, OrderItemProps } from "@/domain/entities/order-item";
 
 export interface IOrderItemFactory {
   create(data: OrderItemFactoryCreate): OrderItem;

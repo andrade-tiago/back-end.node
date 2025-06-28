@@ -9,7 +9,7 @@ import { IProductRepository } from "@/domain/repositories/product.repository";
 import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 import { ApplicationErrorMessages } from "@/application/errors/_error-messages";
-import { IOrderItemFactory } from "@/application/factories/value-objects/order-item.factory";
+import { IOrderItemFactory } from "@/application/factories/entities/order-item.factory";
 
 export class OrderCreateUseCase {
   public constructor(
