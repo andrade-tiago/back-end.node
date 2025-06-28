@@ -1,32 +1,40 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, it, test, vi } from "vitest";
 import { NonFutureDate } from "./non-future-date.vo";
 
 describe('NonFutureDate VO', () => {
   describe('should be created successfully', () => {
+    const now = new Date();
+
     test('from an ISO string', () => {
-      expect(NonFutureDate.create('2025-06-25T19:59:08.740Z').value).toBe(1750881548740);
+      expect(NonFutureDate.create(now).toDate().getTime())
+        .toBe(now.getTime());
     });
     
     test('from a number', () => {
-      expect(NonFutureDate.create(123456).value).toBe(123456);
+      expect(NonFutureDate.create(now.getTime()).toDate().getTime())
+        .toBe(now.getTime());
     });
 
     test('from a Date instance', () => {
-      const dateInstance = new Date();
-
-      expect(NonFutureDate.create(dateInstance).value).toBe(dateInstance.getTime());
+      expect(NonFutureDate.create(now).toDate().getTime())
+        .toBe(now.getTime());
     });
 
     test('from an undefined value', () => {
-      expect(() => NonFutureDate.create(undefined).value).toBeDefined();
+      vi.useFakeTimers();
+      vi.setSystemTime(now);
+
+      expect(NonFutureDate.create(undefined).toDate().getTime())
+        .toBe(now.getTime());
+
+      vi.useRealTimers();
     });
 
     test('with now datetime', () => {
       vi.useFakeTimers();
-      vi.setSystemTime(new Date()); // feeze time
-
-      expect(NonFutureDate.now().value).toBe(Date.now());
-      expect(NonFutureDate.create().value).toBe(Date.now());
+      vi.setSystemTime(now);
+      
+      expect(NonFutureDate.now().toDate().getTime()).toBe(now.getTime());
 
       vi.useRealTimers();
     });

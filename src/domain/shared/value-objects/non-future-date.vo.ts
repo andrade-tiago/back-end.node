@@ -3,10 +3,14 @@ import { InvalidDataError } from "@/domain/errors/invalida-data.error";
 import { valueIsNumeric } from "@/shared/utils/value-is-numeric";
 
 export class NonFutureDate {
-  public readonly value: number;
+  private readonly _value: number;
 
   private constructor(dateInMilliseconds: number) {
-    this.value = dateInMilliseconds;
+    this._value = dateInMilliseconds;
+  }
+
+  public toDate(): Date {
+    return new Date(this._value);
   }
 
   public static create(value?: number | string | Date): NonFutureDate {

@@ -9,7 +9,7 @@ export class ProductMapper implements IProductMapper {
       title: product.title.value,
       price: product.price.value,
       inStock: product.inStock.value,
-      createdAt: new Date(product.createdAt.value).toISOString(),
+      createdAt: product.createdAt.toDate().toISOString(),
     };
   }
 }

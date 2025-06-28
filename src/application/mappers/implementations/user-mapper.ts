@@ -10,8 +10,8 @@ export class UserMapper implements IUserMapper {
       cpf: user.isActive() ? user.cpf.value : null,
       email: user.isActive() ? user.email.value : null,
       role: user.isActive() ? user.role.value : null,
-      createdAt: new Date(user.createdAt.value).toISOString(),
-      deletedAt: user.isDeleted() ? new Date(user.deletedAt.value).toISOString() : null,
+      createdAt: user.createdAt.toDate().toISOString(),
+      deletedAt: user.isDeleted() ? user.deletedAt.toDate().toISOString() : null,
     };
   }
 }

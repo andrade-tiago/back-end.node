@@ -16,7 +16,7 @@ export class OrderMapper implements IOrderMapper {
       id: order.id.value,
       userId: order.userId.value,
       items: items,
-      createdAt: new Date(order.createdAt.value).toISOString(),
+      createdAt: order.createdAt.toDate().toISOString(),
     };
   }
 }
