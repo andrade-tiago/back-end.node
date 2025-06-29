@@ -1,5 +1,5 @@
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
-import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { InvalidDataError } from "@/domain/errors/invalid-data.error";
 
 export class Email {
   // ref: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript

@@ -2,7 +2,7 @@ import { NonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo"
 import { User } from "../user";
 import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
 import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
-import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { InvalidDataError } from "@/domain/errors/invalid-data.error";
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 import { OrderItem } from "../order-item";
 

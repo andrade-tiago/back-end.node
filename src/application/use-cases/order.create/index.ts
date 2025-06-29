@@ -6,7 +6,7 @@ import { NotFoundError } from "@/application/errors/not-found.error";
 import { IOrderFactory } from "@/application/factories/entities/order.factory";
 import { IOrderRepository } from "@/domain/repositories/order.repository";
 import { IProductRepository } from "@/domain/repositories/product.repository";
-import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { InvalidDataError } from "@/domain/errors/invalid-data.error";
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 import { ApplicationErrorMessages } from "@/application/errors/_error-messages";
 import { IOrderItemFactory } from "@/application/factories/entities/order-item.factory";

@@ -1,5 +1,5 @@
 import { DomainErrorMessages } from "@/domain/errors/_error-messages";
-import { InvalidDataError } from "@/domain/errors/invalida-data.error";
+import { InvalidDataError } from "@/domain/errors/invalid-data.error";
 import { valueIsNumeric } from "@/shared/utils/value-is-numeric";
 
 export class Monetary {
