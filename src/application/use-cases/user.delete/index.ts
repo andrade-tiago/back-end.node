@@ -7,6 +7,7 @@ import { IUserRepository } from "@/domain/repositories/user.repository";
 import { NotFoundError } from "@/application/errors/not-found.error";
 import { ApplicationErrorMessages } from "@/application/errors/_error-messages";
 import { ConflictError } from "@/application/errors/conflict.error";
+import { isUserActive } from "@/domain/entities/user/utils/is-user-active";
 
 export class UserDeleteUseCase {
   constructor(
@@ -23,7 +24,7 @@ export class UserDeleteUseCase {
     if (!user) {
       throw new NotFoundError(ApplicationErrorMessages.User.NotFoundById(userId.value));
     }
-    if (!user.isActive()) {
+    if (!isUserActive(user)) {
       throw new ConflictError(ApplicationErrorMessages.User.AlreadyDeleted(userId.value));
     }
 

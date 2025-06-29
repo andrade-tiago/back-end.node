@@ -31,9 +31,6 @@ export abstract class User {
     this.id = props.id;
     this.createdAt = props.createdAt ?? new NonFutureDate();
   }
-
-  public abstract isActive(): this is ActiveUser;
-  public abstract isDeleted(): this is DeletedUser;
 }
 
 export class ActiveUser extends User {
@@ -54,13 +51,6 @@ export class ActiveUser extends User {
     this.email = props.email;
     this.password = props.password;
     this.role = props.role;
-  }
-
-  public isActive(): this is ActiveUser {
-    return true;
-  }
-  public isDeleted(): this is DeletedUser {
-    return false;
   }
 }
 
@@ -85,12 +75,5 @@ export class DeletedUser extends User {
 
   public static from({ id, createdAt }: ActiveUser): DeletedUser {
     return new DeletedUser({ id, createdAt });
-  }
-
-  public isActive(): this is ActiveUser {
-    return false;
-  }
-  public isDeleted(): this is DeletedUser {
-    return true;
   }
 }
