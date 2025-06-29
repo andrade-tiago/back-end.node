@@ -21,5 +21,6 @@ export const DomainErrorMessages = {
   Date: {
     FutureDate: 'Datetime cannot be in the future',
     InvalidDate: 'Invalid datetime',
+    DeletionEarlierThanCreation: 'Deletion datetime cannot be earlier than creation datetime',
   },
 } as const;

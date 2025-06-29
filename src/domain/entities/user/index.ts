@@ -5,6 +5,8 @@ import { Email } from "./value-objects/email.vo";
 import { Password } from "./value-objects/password.vo";
 import { NonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo";
 import { UserRole } from "./value-objects/user-role.vo";
+import { ConflictError } from "@/application/errors/conflict.error";
+import { DomainErrorMessages } from "@/domain/errors/_error-messages";
 
 type UserProps = {
   id: Uuid;
@@ -71,7 +73,14 @@ export class DeletedUser extends User {
       createdAt: props.createdAt,
     });
 
-    this.deletedAt = props.deletedAt ?? new NonFutureDate();
+    if (props.deletedAt) {
+      if (props.deletedAt.toDate() < this.createdAt.toDate()) {
+        throw new ConflictError(DomainErrorMessages.Date.DeletionEarlierThanCreation);
+      }
+      this.deletedAt = props.deletedAt;
+    } else {
+      this.deletedAt = new NonFutureDate();
+    }
   }
 
   public static from({ id, createdAt }: ActiveUser): DeletedUser {
