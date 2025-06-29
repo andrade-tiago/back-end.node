@@ -10,7 +10,7 @@ export class Password {
   public constructor(hashedPasswordStr: string) {
     hashedPasswordStr = hashedPasswordStr.trim();
 
-    if (Password.encryptedStringRegex.test(hashedPasswordStr)) {
+    if (!Password.encryptedStringRegex.test(hashedPasswordStr)) {
       throw new InternalError(DomainErrorMessages.NonEncryptedString(hashedPasswordStr));
     }
 
