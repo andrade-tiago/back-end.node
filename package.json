@@ -9,6 +9,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@tsconfig/node22": "^22.0.1",
     "typescript": "^5.8.3",
     "vite-tsconfig-paths": "^5.1.4",
