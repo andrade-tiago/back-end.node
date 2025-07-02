@@ -1,22 +1,23 @@
 import { describe, expect, it, vi, vitest } from "vitest";
 import { ActiveUser, DeletedUser } from ".";
-import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
-import { UserName } from "./value-objects/user-name.vo";
-import { CPF } from "./value-objects/cpf.vo";
-import { Email } from "./value-objects/email.vo";
-import { Password } from "./value-objects/password.vo";
-import { UserRole, UserRoleEnum } from "./value-objects/user-role.vo";
 import { NonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo";
+import { makeFakeNonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo.fake";
+import { makeFakeUuid } from "@/domain/shared/value-objects/uuid.vo.fake";
+import { makeFakeUserName } from "./value-objects/user-name.vo.fake";
+import { makeFakeCPF } from "./value-objects/cpf.vo.fake";
+import { makeFakeEmail } from "./value-objects/email.vo.fake";
+import { makeFakePassword } from "./value-objects/password.vo.fake";
+import { makeFakeUserRole } from "./value-objects/user-role.vo.fake";
 
 const now = new Date();
-const randomNonFutureDate = new NonFutureDate('2025-06-29T17:31:24.808Z');
+const randomNonFutureDate = makeFakeNonFutureDate();
 
-const id = new Uuid('c6288df3-ad11-45a3-94b4-5d0697fa5e26');
-const name = new UserName('Foo Bar');
-const cpf = new CPF('532.571.030-34');
-const email = new Email('foo@bar.com');
-const password = new Password('$2a$12$qd/DLBe/pel.NHVtbWjsSO5ucbCoVlbR8mAqUlQ48EkiVCGoOg3m2');
-const role = new UserRole(UserRoleEnum.User);
+const id = makeFakeUuid();
+const name = makeFakeUserName();
+const cpf = makeFakeCPF();
+const email = makeFakeEmail();
+const password = makeFakePassword();
+const role = makeFakeUserRole();
 
 describe('ActiveUser Entity', () => {
   it('should be created with accessible and correct values', () => {
