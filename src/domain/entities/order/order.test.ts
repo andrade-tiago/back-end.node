@@ -2,14 +2,14 @@ import { describe, expect, it, vi } from "vitest";
 import { Order } from ".";
 import { makeFakeUuid } from "@/domain/shared/value-objects/uuid.vo.fake";
 import { makeFakeNonFutureDate } from "@/domain/shared/value-objects/non-future-date.vo.fake";
-import { makeOrderItem } from "../order-item/order-item.fake";
+import { makeFakeOrderItem } from "../order-item/order-item.fake";
 
 describe('Order Entity', () => {
   it('should be created with accessible, correct values', () => {
     const id = makeFakeUuid();
     const userId = makeFakeUuid();
     const createdAt = makeFakeNonFutureDate();
-    const items = Array.from({ length: 10 }).map(makeOrderItem);
+    const items = Array.from({ length: 10 }).map(makeFakeOrderItem);
 
     {
       const order1 = new Order({ id, userId, items, createdAt });
