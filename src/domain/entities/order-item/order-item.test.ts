@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { OrderItem } from ".";
-import { Uuid } from "@/domain/shared/value-objects/uuid.vo";
-import { PositiveInt } from "@/domain/shared/value-objects/positive-int.vo";
-import { Monetary } from "@/domain/shared/value-objects/monetary.vo";
+import { makeFakeUuid } from "@/domain/shared/value-objects/uuid.vo.fake";
+import { makeFakeMonetary } from "@/domain/shared/value-objects/monetary.vo.fake";
+import { makeFakePositiveInt } from "@/domain/shared/value-objects/positive-int.vo.fake";
 
 describe('OrderItem Entity', () => {
   it('should be created with accessible and correct values', () => {
-    const uuid = new Uuid('95d58700-fe12-4fa6-9c8e-a2b9b353cda5');
-    const price = new Monetary(12.5);
-    const quantity = new PositiveInt(10);
+    const uuid = makeFakeUuid();
+    const price = makeFakeMonetary();
+    const quantity = makeFakePositiveInt();
 
     const orderItem = new OrderItem({
       productId: uuid,
