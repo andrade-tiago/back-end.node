@@ -12,7 +12,6 @@ export class UserLoginUseCase {
     private readonly _userRepository: IUserRepository,
     private readonly _authService: IAuthService,
     private readonly _hashService: IHashService,
-    private readonly _ttlInSec: number,
   ) {}
 
   public async execute(input: UserLoginInput): Promise<string> {
@@ -29,9 +28,8 @@ export class UserLoginUseCase {
     }
 
     const payload = new TokenPayload({
-      sub: user.id,
-      email: user.email,
-      ttlInSec: this._ttlInSec,
+      userId: user.id,
+      userEmail: user.email,
     });
     return await this._authService.generateToken(payload);
   }
