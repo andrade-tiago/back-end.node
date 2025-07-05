@@ -8,11 +8,12 @@ export class ZodEnvParser implements IEnvParser {
 }
 
 const zodEnvSchema = createSchemaFromType<Env>({
-  ACCESS_TOKEN_TTL: z.coerce.number().int().min(60),
   HASH_SALT_OR_ROUNDS: z.union([
     z.coerce.number().int().min(1).max(20),
     z.string().min(1),
   ]),
+  JWT_SECRET: z.string().min(1),
+  JWT_TOKEN_DURATION_SECS: z.coerce.number().int().min(60),
 });
 
 function createSchemaFromType<T>(schema: { [K in keyof T]: z.ZodType<T[K]> }) {

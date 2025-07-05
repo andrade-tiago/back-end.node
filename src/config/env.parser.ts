@@ -1,6 +1,7 @@
 export type Env = {
-  ACCESS_TOKEN_TTL: number;
   HASH_SALT_OR_ROUNDS: number | string;
+  JWT_SECRET: string;
+  JWT_TOKEN_DURATION_SECS: number;
 }
 
 export interface IEnvParser {

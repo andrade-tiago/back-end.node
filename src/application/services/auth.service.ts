@@ -1,4 +1,4 @@
 export interface IAuthService {
-  generateToken<T>(payload: T): Promise<string>;
-  parseToken<T>(token: string): Promise<T>;
+  generateToken<T extends object>(payload: T): Promise<string>;
+  parseToken<T extends object>(token: string): Promise<T>;
 }
