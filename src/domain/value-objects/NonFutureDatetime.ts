@@ -1,8 +1,6 @@
 import type { INonFutureDatetimeParser } from "@/domain/parsers/INonFutureDatetimeParser";
 
 export class NonFutureDatetime {
-  public static readonly now = () => new NonFutureDatetime(new Date().toISOString());
-
   private constructor(
     private readonly _value: NonFutureDatetimeValue,
   ) {}
@@ -17,6 +15,9 @@ export class NonFutureDatetime {
   }
   public static unsafeCreate(value: NonFutureDatetimeValue): NonFutureDatetime {
     return new NonFutureDatetime(value);
+  }
+  public static now() {
+    return new NonFutureDatetime(new Date().toISOString());
   }
 
   public get value() { return this._value; }
