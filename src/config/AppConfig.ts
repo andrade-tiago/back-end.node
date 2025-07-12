@@ -1,4 +1,4 @@
-import { IEnvParser } from '@/config/env.parser';
+import { IEnvParser } from "./parsers/__IEnvParser";
 
 export class AppConfig {
   public readonly hashSaltOrRounds: number | string;

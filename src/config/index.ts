@@ -1,5 +1,5 @@
-import { AppConfig } from "./app-config";
-import { ZodEnvParser } from "./parsers/zod-env-parser";
+import { AppConfig } from "./AppConfig";
+import { ZodEnvParser } from "./parsers/ZodEnvParser";
 
 const envParser = new ZodEnvParser();
 

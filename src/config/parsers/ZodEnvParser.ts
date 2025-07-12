@@ -1,5 +1,5 @@
+import { Env, IEnvParser } from "./__IEnvParser";
 import { z } from "zod";
-import { Env, IEnvParser } from "../env.parser";
 
 export class ZodEnvParser implements IEnvParser {
   public parse(envObj: unknown): Env {
