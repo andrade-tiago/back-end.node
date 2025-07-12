@@ -1,10 +1,10 @@
-import type { OrderGetByUserIdUseCaseInput } from "./input";
 import type { IOrderRepository } from "@/domain/repositories/IOrderRepository";
 import type { IUserRepository } from "@/domain/repositories/IUserRepository";
 import type { IUuidFactory } from "@/domain/factories/IUuidFactory";
 import type { IPositiveIntFactory } from "@/domain/factories/IPositiveIntFactory";
 import type { IOrderMapper } from "@/domain/mappers/IOrderMapper";
 import type { OrderOutput } from "@/application/dtos/OrderOutput";
+import type { OrderGetByUserIdUseCaseInput } from "./input";
 import { ErrorMessages, NotFoundError } from "@/application/errors";
 
 export class OrderGetByUserIdUseCase {

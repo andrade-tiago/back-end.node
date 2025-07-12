@@ -1,4 +1,4 @@
-import type { INonFutureDatetimeParser } from "../parsers/INonFutureDatetimeParser"
+import type { INonFutureDatetimeParser } from "@/domain/parsers/INonFutureDatetimeParser";
 
 export class NonFutureDatetime {
   public static readonly now = () => new NonFutureDatetime(new Date().toISOString());

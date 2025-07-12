@@ -1,5 +1,5 @@
 import type { ActiveUser, User } from "@/domain/entities/User";
-import type { PositiveInt } from "../value-objects/PositiveInt";
+import type { PositiveInt } from "@/domain/value-objects/PositiveInt";
 
 export interface IUserRepository {
   save(user: User): Promise<void>;

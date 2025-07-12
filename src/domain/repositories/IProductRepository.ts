@@ -1,5 +1,5 @@
 import type { Product } from "@/domain/entities/Product";
-import type { PositiveInt } from "../value-objects/PositiveInt";
+import type { PositiveInt } from "@/domain/value-objects/PositiveInt";
 
 export interface IProductRepository {
   add(product: Product): Promise<void>;

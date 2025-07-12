@@ -1,9 +1,9 @@
-import { Product } from "../entities/Product";
-import { MoneyCreateValue } from "../value-objects/Money";
-import { NonFutureDatetimeCreateValue } from "../value-objects/NonFutureDatetime";
-import { NonNegativeIntCreateValue } from "../value-objects/NonNegativeInt";
-import { ProductTitleCreateValue } from "../value-objects/ProductTitle";
-import { UuidCreateValue } from "../value-objects/Uuid";
+import { Product } from "@/domain/entities/Product";
+import { MoneyCreateValue } from "@/domain/value-objects/Money";
+import { NonFutureDatetimeCreateValue } from "@/domain/value-objects/NonFutureDatetime";
+import { NonNegativeIntCreateValue } from "@/domain/value-objects/NonNegativeInt";
+import { ProductTitleCreateValue } from "@/domain/value-objects/ProductTitle";
+import { UuidCreateValue } from "@/domain/value-objects/Uuid";
 
 export interface IProductFactory {
   create(data: ProductFactoryCreate): Product;

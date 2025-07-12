@@ -1,4 +1,4 @@
-import type { IUuidParser } from "../parsers/IUuidParser"
+import type { IUuidParser } from "@/domain/parsers/IUuidParser";
 
 export class Uuid {
   private constructor(

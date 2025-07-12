@@ -1,4 +1,4 @@
-import type { IFullNameParser } from "../parsers/IFullNameParser"
+import type { IFullNameParser } from "@/domain/parsers/IFullNameParser";
 
 export class FullName {
   private constructor(

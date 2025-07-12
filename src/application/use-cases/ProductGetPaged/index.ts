@@ -1,8 +1,8 @@
 import type { IProductMapper } from "@/domain/mappers/IProductMapper";
 import type { IProductRepository } from "@/domain/repositories/IProductRepository";
-import type { ProductGetPagedInput } from "./input";
 import type { ProductOutput } from "@/application/dtos/ProductOutput";
 import type { IPositiveIntFactory } from "@/domain/factories/IPositiveIntFactory";
+import type { ProductGetPagedInput } from "./input";
 
 export class ProductGetPagedUseCase {
   private readonly _positiveIntFactory: ProductGetPagedUseCaseDependencies['positiveIntFactory'];

@@ -1,4 +1,4 @@
-import type { IMoneyParser } from "@/domain//parsers/IMoneyParser"
+import type { IMoneyParser } from "@/domain/parsers/IMoneyParser";
 
 export class Money {
   private constructor(
