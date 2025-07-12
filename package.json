@@ -6,7 +6,8 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "watch": "tsc --noEmit --watch"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
