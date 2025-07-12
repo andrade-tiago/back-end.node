@@ -20,6 +20,10 @@ export class NonFutureDatetime {
   }
 
   public get value() { return this._value; }
+
+  public toDate(): Date {
+    return new Date(this._value);
+  }
 }
 
 export type NonFutureDatetimeValue = ReturnType<Date['toISOString']>
