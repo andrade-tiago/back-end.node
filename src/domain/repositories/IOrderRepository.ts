@@ -9,7 +9,7 @@ export interface IOrderRepository {
 }
 
 type OrderGetByUserIdOptions = {
-  userId: UserProps['id'],
-  pageNumber: PositiveInt,
-  pageSize: PositiveInt,
+  userId: UserProps['id'];
+  pageNumber: PositiveInt;
+  pageSize: PositiveInt;
 }

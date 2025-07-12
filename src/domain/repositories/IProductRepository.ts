@@ -1,4 +1,5 @@
 import type { Product } from "@/domain/entities/Product";
+import type { PositiveInt } from "../value-objects/PositiveInt";
 
 export interface IProductRepository {
   add(product: Product): Promise<void>;
@@ -8,6 +9,6 @@ export interface IProductRepository {
 }
 
 export type ProductGetPagedOptions = {
-  pageSize: number;
-  pageNumber: number;
+  pageSize: PositiveInt;
+  pageNumber: PositiveInt;
 }

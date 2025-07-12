@@ -1,4 +1,5 @@
 import type { ActiveUser, User } from "@/domain/entities/User";
+import type { PositiveInt } from "../value-objects/PositiveInt";
 
 export interface IUserRepository {
   save(user: User): Promise<void>;
@@ -11,6 +12,6 @@ export interface IUserRepository {
 }
 
 export type UserGetPagedOptions = {
-  pageSize: number;
-  pageNumber: number;
+  pageSize: PositiveInt;
+  pageNumber: PositiveInt;
 }
