@@ -6,11 +6,15 @@ import type { UuidCreateValue } from "@/domain/value-objects/Uuid";
 import { ErrorMessages, NotFoundError } from "@/application/errors";
 
 export class ProductCreateUseCase {
-  public constructor(
-    private readonly _uuidFactory: IUuidFactory,
-    private readonly _productRepository: IProductRepository,
-    private readonly _productMapper: IProductMapper,
-  ) {}
+  private readonly _productMapper: ProductCreateUseCaseDependencies['productMapper'];
+  private readonly _productRepository: ProductCreateUseCaseDependencies['productRepository'];
+  private readonly _uuidFactory: ProductCreateUseCaseDependencies['uuidFactory'];
+
+  public constructor(dependencies: ProductCreateUseCaseDependencies) {
+    this._productMapper = dependencies.productMapper;
+    this._productRepository = dependencies.productRepository;
+    this._uuidFactory = dependencies.uuidFactory;
+  }
 
   public async execute(id: UuidCreateValue): Promise<ProductOutput> {
     const idObj = this._uuidFactory.create(id);
@@ -22,4 +26,10 @@ export class ProductCreateUseCase {
     }
     return this._productMapper.toOutput(product);
   }
+}
+
+type ProductCreateUseCaseDependencies = {
+  uuidFactory: IUuidFactory;
+  productRepository: IProductRepository;
+  productMapper: IProductMapper;
 }

@@ -8,13 +8,19 @@ import type { OrderOutput } from "@/application/dtos/OrderOutput";
 import { ErrorMessages, NotFoundError } from "@/application/errors";
 
 export class OrderGetByUserIdUseCase {
-  public constructor(
-    private readonly _uuidFactory: IUuidFactory,
-    private readonly _userRepository: IUserRepository,
-    private readonly _orderRepository: IOrderRepository,
-    private readonly _positiveIntFactory: IPositiveIntFactory,
-    private readonly _orderMapper: IOrderMapper,
-  ) {}
+  private readonly _orderMapper: OrderGetByUserIdUseCaseDependencies['orderMapper'];
+  private readonly _orderRepository: OrderGetByUserIdUseCaseDependencies['orderRepository'];
+  private readonly _positiveIntFactory: OrderGetByUserIdUseCaseDependencies['positiveIntFactory'];
+  private readonly _userRepository: OrderGetByUserIdUseCaseDependencies['userRepository'];
+  private readonly _uuidFactory: OrderGetByUserIdUseCaseDependencies['uuidFactory'];
+
+  public constructor(dependencies: OrderGetByUserIdUseCaseDependencies) {
+    this._orderMapper = dependencies.orderMapper;
+    this._orderRepository = dependencies.orderRepository;
+    this._positiveIntFactory = dependencies.positiveIntFactory;
+    this._userRepository = dependencies.userRepository;
+    this._uuidFactory = dependencies.uuidFactory;
+  }
 
   public async execute(data: OrderGetByUserIdUseCaseInput): Promise<OrderOutput[]> {
     const userIdObj = this._uuidFactory.create(data.userId);
@@ -35,4 +41,12 @@ export class OrderGetByUserIdUseCase {
 
     return userOrders.map(this._orderMapper.toOutput);
   }
+}
+
+type OrderGetByUserIdUseCaseDependencies = {
+  orderMapper: IOrderMapper;
+  orderRepository: IOrderRepository;
+  positiveIntFactory: IPositiveIntFactory;
+  uuidFactory: IUuidFactory;
+  userRepository: IUserRepository;
 }

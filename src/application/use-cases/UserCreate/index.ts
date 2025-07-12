@@ -7,12 +7,17 @@ import type { UserCreateInput } from "./input";
 import { ConflictError, ErrorMessages } from "@/application/errors";
 
 export class UserCreateUseCase {
-  constructor(
-    private readonly _userRepository: IUserRepository,
-    private readonly _userFactory: IUserFactory,
-    private readonly _emailFactory: IEmailAddressFactory,
-    private readonly _userMapper: IUserMapper,
-  ) {}
+  private readonly _emailFactory: UserCreateUseCaseDependencies['emailFactory'];
+  private readonly _userFactory: UserCreateUseCaseDependencies['userFactory'];
+  private readonly _userMapper: UserCreateUseCaseDependencies['userMapper'];
+  private readonly _userRepository: UserCreateUseCaseDependencies['userRepository'];
+
+  public constructor(dependencies: UserCreateUseCaseDependencies) {
+    this._emailFactory = dependencies.emailFactory;
+    this._userFactory = dependencies.userFactory;
+    this._userMapper = dependencies.userMapper;
+    this._userRepository = dependencies.userRepository;
+  }
 
   public async execute(data: UserCreateInput): Promise<UserOutput> {
     const userEmail = this._emailFactory.create(data.email);
@@ -37,4 +42,11 @@ export class UserCreateUseCase {
 
     return this._userMapper.toOutput(user);
   }
+}
+
+type UserCreateUseCaseDependencies = {
+  emailFactory: IEmailAddressFactory;
+  userFactory: IUserFactory;
+  userMapper: IUserMapper;
+  userRepository: IUserRepository;
 }

@@ -8,11 +8,15 @@ import { isUserActive } from "@/domain/utils/isUserActive";
 import { ConflictError, ErrorMessages, NotFoundError } from "@/application/errors";
 
 export class UserDeleteUseCase {
-  constructor(
-    private readonly _uuidFactory: IUuidFactory,
-    private readonly _userRepository: IUserRepository,
-    private readonly _userMapper: IUserMapper,
-  ) {}
+  private readonly _userMapper: UserDeleteUseCaseDependencies['userMapper'];
+  private readonly _userRepository: UserDeleteUseCaseDependencies['userRepository'];
+  private readonly _uuidFactory: UserDeleteUseCaseDependencies['uuidFactory'];
+
+  constructor(dependencies: UserDeleteUseCaseDependencies) {
+    this._userMapper = dependencies.userMapper;
+    this._userRepository = dependencies.userRepository;
+    this._uuidFactory = dependencies.uuidFactory;
+  }
 
   public async execute(id: UuidCreateValue): Promise<UserOutput> {
     const userId = this._uuidFactory.create(id);
@@ -32,4 +36,10 @@ export class UserDeleteUseCase {
 
     return this._userMapper.toOutput(deletedUser);
   }
+}
+
+type UserDeleteUseCaseDependencies = {
+  userMapper: IUserMapper;
+  userRepository: IUserRepository;
+  uuidFactory: IUuidFactory;
 }

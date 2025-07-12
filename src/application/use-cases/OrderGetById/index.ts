@@ -6,11 +6,15 @@ import type { UuidCreateValue } from "@/domain/value-objects/Uuid";
 import { ErrorMessages, NotFoundError } from "@/application/errors";
 
 export class OrderGetByIdUseCase {
-  public constructor(
-    private readonly _uuidFactory: IUuidFactory,
-    private readonly _orderRepository: IOrderRepository,
-    private readonly _orderMapper: IOrderMapper,
-  ) {}
+  private readonly _uuidFactory: OrderGetByIdUseCaseDependencies['uuidFactory'];
+  private readonly _orderRepository: OrderGetByIdUseCaseDependencies['orderRepository'];
+  private readonly _orderMapper: OrderGetByIdUseCaseDependencies['orderMapper'];
+
+  public constructor(dependencies: OrderGetByIdUseCaseDependencies) {
+    this._orderMapper = dependencies.orderMapper;
+    this._orderRepository = dependencies.orderRepository;
+    this._uuidFactory = dependencies.uuidFactory;
+  }
 
   public async execute(id: UuidCreateValue): Promise<OrderOutput> {
     const idObj = this._uuidFactory.create(id);
@@ -22,4 +26,10 @@ export class OrderGetByIdUseCase {
     }
     return this._orderMapper.toOutput(order);
   }
+}
+
+type OrderGetByIdUseCaseDependencies = {
+  orderMapper: IOrderMapper;
+  orderRepository: IOrderRepository;
+  uuidFactory: IUuidFactory;
 }

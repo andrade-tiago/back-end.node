@@ -5,11 +5,15 @@ import type { ProductOutput } from "@/application/dtos/ProductOutput";
 import type { ProductCreateInput } from "./input";
 
 export class ProductCreateUseCase {
-  public constructor(
-    private readonly _productRepository: IProductRepository,
-    private readonly _productFactory: IProductFactory,
-    private readonly _productMapper: IProductMapper,
-  ) {}
+  private readonly _productFactory: ProductCreateUseCaseDependencies['productFactory'];
+  private readonly _productMapper: ProductCreateUseCaseDependencies['productMapper'];
+  private readonly _productRepository: ProductCreateUseCaseDependencies['productRepository'];
+
+  public constructor(dependencies: ProductCreateUseCaseDependencies) {
+    this._productFactory = dependencies.productFactory;
+    this._productMapper = dependencies.productMapper;
+    this._productRepository = dependencies.productRepository;
+  }
 
   public async execute(data: ProductCreateInput): Promise<ProductOutput> {
     const newProduct = this._productFactory.create({
@@ -22,4 +26,10 @@ export class ProductCreateUseCase {
 
     return this._productMapper.toOutput(newProduct);
   }
+}
+
+type ProductCreateUseCaseDependencies = {
+  productFactory: IProductFactory;
+  productMapper: IProductMapper;
+  productRepository: IProductRepository;
 }

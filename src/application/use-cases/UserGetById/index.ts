@@ -5,11 +5,15 @@ import type { IUserRepository } from "@/domain/repositories/IUserRepository";
 import { ErrorMessages, NotFoundError } from "@/application/errors";
 
 export class UserGetByIdUseCase {
-  constructor(
-    private readonly _userRepository: IUserRepository,
-    private readonly _uuidFactory: IUuidFactory,
-    private readonly _userMapper: IUserMapper,
-  ) {}
+  private readonly _userMapper: UserGetByIdUseCaseDependencies['userMapper'];
+  private readonly _userRepository: UserGetByIdUseCaseDependencies['userRepository'];
+  private readonly _uuidFactory: UserGetByIdUseCaseDependencies['uuidFactory'];
+
+  constructor(dependencies: UserGetByIdUseCaseDependencies) {
+    this._userMapper = dependencies.userMapper;
+    this._userRepository = dependencies.userRepository;
+    this._uuidFactory = dependencies.uuidFactory;
+  }
 
   public async execute(id: string): Promise<UserOutput> {
     const userId = this._uuidFactory.create(id);
@@ -22,4 +26,10 @@ export class UserGetByIdUseCase {
 
     return this._userMapper.toOutput(user);
   }
+}
+
+type UserGetByIdUseCaseDependencies = {
+  userMapper: IUserMapper;
+  userRepository: IUserRepository;
+  uuidFactory: IUuidFactory;
 }

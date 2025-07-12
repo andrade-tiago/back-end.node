@@ -5,11 +5,15 @@ import type { IPositiveIntFactory } from "@/domain/factories/IPositiveIntFactory
 import type { UserGetPagedInput } from "./input";
 
 export class UserGetPagedUseCase {
-  constructor(
-    private readonly _userRepository: IUserRepository,
-    private readonly _userMapper: IUserMapper,
-    private readonly _positiveIntFactory: IPositiveIntFactory,
-  ) {}
+  private readonly _positiveIntFactory: UserGetPagedUseCaseDependencies['positiveIntFactory'];
+  private readonly _userMapper: UserGetPagedUseCaseDependencies['userMapper'];
+  private readonly _userRepository: UserGetPagedUseCaseDependencies['userRepository'];
+
+  public constructor(dependencies: UserGetPagedUseCaseDependencies) {
+    this._positiveIntFactory = dependencies.positiveIntFactory;
+    this._userMapper = dependencies.userMapper;
+    this._userRepository = dependencies.userRepository;
+  }
 
   public async execute(props: UserGetPagedInput): Promise<UserOutput[]> {
     const users = await this._userRepository.getPaged({
@@ -21,3 +25,8 @@ export class UserGetPagedUseCase {
   }
 }
 
+type UserGetPagedUseCaseDependencies = {
+  positiveIntFactory: IPositiveIntFactory;
+  userMapper: IUserMapper;
+  userRepository: IUserRepository;
+}

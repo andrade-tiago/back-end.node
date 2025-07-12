@@ -5,11 +5,15 @@ import type { ProductOutput } from "@/application/dtos/ProductOutput";
 import type { IPositiveIntFactory } from "@/domain/factories/IPositiveIntFactory";
 
 export class ProductGetPagedUseCase {
-  public constructor(
-    private readonly _productRepository: IProductRepository,
-    private readonly _productMapper: IProductMapper,
-    private readonly _positiveIntFactory: IPositiveIntFactory,
-  ) {}
+  private readonly _positiveIntFactory: ProductGetPagedUseCaseDependencies['positiveIntFactory'];
+  private readonly _productMapper: ProductGetPagedUseCaseDependencies['productMapper'];
+  private readonly _productRepository: ProductGetPagedUseCaseDependencies['productRepository'];
+
+  public constructor(dependencies: ProductGetPagedUseCaseDependencies) {
+    this._positiveIntFactory = dependencies.positiveIntFactory;
+    this._productMapper = dependencies.productMapper;
+    this._productRepository = dependencies.productRepository;
+  }
 
   public async execute(options: ProductGetPagedInput): Promise<ProductOutput[]> {
     const products = await this._productRepository.getPaged({
@@ -19,4 +23,10 @@ export class ProductGetPagedUseCase {
 
     return products.map(this._productMapper.toOutput);
   }
+}
+
+type ProductGetPagedUseCaseDependencies = {
+  positiveIntFactory: IPositiveIntFactory;
+  productMapper: IProductMapper;
+  productRepository: IProductRepository;
 }

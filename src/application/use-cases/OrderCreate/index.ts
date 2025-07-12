@@ -10,14 +10,21 @@ import { ErrorMessages as DomainErrorMessages, InvalidDataError } from "@/domain
 import { ErrorMessages as ApplicationErrorMessages, NotFoundError } from "@/application/errors";
 
 export class OrderCreateUseCase {
-  public constructor(
-    private readonly _orderRepository: IOrderRepository,
-    private readonly _orderMapper: IOrderMapper,
-    private readonly _orderFactory: IOrderFactory,
-    private readonly _orderItemFactory: IOrderItemFactory,
-    private readonly _productRepository: IProductRepository,
-    private readonly _uuidFactory: IUuidFactory,
-  ) {}
+  private readonly _orderFactory: OrderCreateUseCaseDependencies['orderFactory'];
+  private readonly _orderItemFactory: OrderCreateUseCaseDependencies['orderItemFactory'];
+  private readonly _orderMapper: OrderCreateUseCaseDependencies['orderMapper'];
+  private readonly _orderRepository: OrderCreateUseCaseDependencies['orderRepository'];
+  private readonly _productRepository: OrderCreateUseCaseDependencies['productRepository'];
+  private readonly _uuidFactory: OrderCreateUseCaseDependencies['uuidFactory'];
+  
+  public constructor(dependencies: OrderCreateUseCaseDependencies) {
+    this._orderFactory = dependencies.orderFactory;
+    this._orderItemFactory = dependencies.orderItemFactory;
+    this._orderMapper = dependencies.orderMapper;
+    this._orderRepository = dependencies.orderRepository;
+    this._productRepository = dependencies.productRepository;
+    this._uuidFactory = dependencies.uuidFactory;
+  }
 
   public async execute(data: OrderCreateInput): Promise<OrderOutput> {
     const productIds = data.items.map(i => this._uuidFactory.create(i.productId));
@@ -49,4 +56,13 @@ export class OrderCreateUseCase {
 
     return this._orderMapper.toOutput(order);
   }
+}
+
+type OrderCreateUseCaseDependencies = {
+  orderFactory: IOrderFactory;
+  orderItemFactory: IOrderItemFactory;
+  orderMapper: IOrderMapper;
+  orderRepository: IOrderRepository;
+  productRepository: IProductRepository;
+  uuidFactory: IUuidFactory;
 }
