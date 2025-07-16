@@ -1,20 +1,20 @@
-import type { IEmailParser } from "@/domain/parsers/IEmailAddressParser";
+import type { EmailAddressParserInput, IEmailParser } from "@/domain/parsers/IEmailAddressParser";
 
 export class EmailAddress {
   private constructor(
     private readonly _value: EmailAddressValue,
   ) {}
 
-  public static create(value: EmailAddressCreateValue, { parser }: EmailAddressCreateDependencies): EmailAddress {
-    if (value instanceof EmailAddress) {
-      return new EmailAddress(value.value);
+  public static create(input: EmailAddressCreateValue, { parser }: EmailAddressCreateDependencies): EmailAddress {
+    if (input instanceof EmailAddress) {
+      return new EmailAddress(input.value);
     }
-    const parsedValue = parser.parse(value);
+    const parsedValue = parser.parse(input);
 
     return new EmailAddress(parsedValue);
   }
-  public static unsafeCreate(value: EmailAddressValue): EmailAddress {
-    return new EmailAddress(value);
+  public static unsafeCreate(validValue: EmailAddressValue): EmailAddress {
+    return new EmailAddress(validValue);
   }
 
   public get value() { return this._value; }
@@ -22,7 +22,7 @@ export class EmailAddress {
 
 export type EmailAddressValue = string
 
-export type EmailAddressCreateValue = string | EmailAddress
+export type EmailAddressCreateValue = EmailAddressParserInput | EmailAddress
 
 export type EmailAddressCreateDependencies = {
   parser: IEmailParser;

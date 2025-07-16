@@ -1,20 +1,20 @@
-import type { IUuidParser } from "@/domain/parsers/IUuidParser";
+import type { IUuidParser, UuidParserInput } from "@/domain/parsers/IUuidParser";
 
 export class Uuid {
   private constructor(
     private readonly _value: UuidValue,
   ) {}
 
-  public static create(value: UuidCreateValue, { parser }: UuidCreateDependencies): Uuid {
-    if (value instanceof Uuid) {
-      return new Uuid(value.value);
+  public static create(input: UuidCreateValue, { parser }: UuidCreateDependencies): Uuid {
+    if (input instanceof Uuid) {
+      return new Uuid(input.value);
     }
-    const parsedValue = parser.parse(value);
+    const parsedValue = parser.parse(input);
 
     return new Uuid(parsedValue);
   }
-  public static unsafeCreate(value: UuidValue): Uuid {
-    return new Uuid(value);
+  public static unsafeCreate(validValue: UuidValue): Uuid {
+    return new Uuid(validValue);
   }
 
   public get value() { return this._value; }
@@ -22,7 +22,7 @@ export class Uuid {
 
 export type UuidValue = string
 
-export type UuidCreateValue = string | Uuid
+export type UuidCreateValue = UuidParserInput | Uuid
 
 export type UuidCreateDependencies = {
   parser: IUuidParser;

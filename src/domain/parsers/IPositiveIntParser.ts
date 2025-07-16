@@ -1,4 +1,7 @@
 import type { IParser } from "./__IParser";
-import type { PositiveIntCreateValue, PositiveIntValue } from "@/domain/value-objects/PositiveInt";
+import type { PositiveIntValue } from "@/domain/value-objects/PositiveInt";
 
-export interface IPositiveIntParser extends IParser<PositiveIntCreateValue, PositiveIntValue> {}
+export type PositiveIntParserInput = number
+
+export interface IPositiveIntParser
+  extends IParser<PositiveIntParserInput, PositiveIntValue> {}

@@ -1,4 +1,7 @@
 import type { IParser } from "./__IParser";
-import type { NonFutureDatetime, NonFutureDatetimeCreateValue } from "@/domain/value-objects/NonFutureDatetime";
+import type { NonFutureDatetimeValue } from "@/domain/value-objects/NonFutureDatetime";
 
-export interface INonFutureDatetimeParser extends IParser<NonFutureDatetimeCreateValue, NonFutureDatetime['_value']> {}
+export type NonFutureDatetimeParserInput = ConstructorParameters<typeof Date>[0]
+
+export interface INonFutureDatetimeParser
+  extends IParser<NonFutureDatetimeParserInput, NonFutureDatetimeValue> {}

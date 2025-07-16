@@ -1,4 +1,4 @@
-import type { IPositiveIntParser } from "@/domain/parsers/IPositiveIntParser";
+import type { IPositiveIntParser, PositiveIntParserInput } from "@/domain/parsers/IPositiveIntParser";
 
 export class PositiveInt {
   public static readonly ONE = new PositiveInt(1);
@@ -7,16 +7,16 @@ export class PositiveInt {
     private readonly _value: PositiveIntValue,
   ) {}
 
-  public static create(value: PositiveIntCreateValue, { parser }: PositiveIntCreateDependencies): PositiveInt {
-    if (value instanceof PositiveInt) {
-      return new PositiveInt(value.value);
+  public static create(input: PositiveIntCreateValue, { parser }: PositiveIntCreateDependencies): PositiveInt {
+    if (input instanceof PositiveInt) {
+      return new PositiveInt(input.value);
     }
-    const parsedValue = parser.parse(value);
+    const parsedValue = parser.parse(input);
 
     return new PositiveInt(parsedValue);
   }
-  public static unsafeCreate(value: PositiveIntValue): PositiveInt {
-    return new PositiveInt(value);
+  public static unsafeCreate(validValue: PositiveIntValue): PositiveInt {
+    return new PositiveInt(validValue);
   }
 
   public get value() { return this._value; }
@@ -24,7 +24,7 @@ export class PositiveInt {
 
 export type PositiveIntValue = number
 
-export type PositiveIntCreateValue = number | PositiveInt
+export type PositiveIntCreateValue = PositiveIntParserInput | PositiveInt
 
 export type PositiveIntCreateDependencies = {
   parser: IPositiveIntParser;

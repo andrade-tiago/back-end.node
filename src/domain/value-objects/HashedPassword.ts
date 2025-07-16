@@ -1,20 +1,20 @@
-import type { IHashedPasswordParser } from "@/domain/parsers/IHashedPasswordParser";
+import type { HashedPasswordParserInput, IHashedPasswordParser } from "@/domain/parsers/IHashedPasswordParser";
 
 export class HashedPassword {
   private constructor(
     private readonly _value: HashedPasswordValue,
   ) {}
 
-  public static create(value: HashedPasswordCreateValue, { parser }: HashedPasswordCreateDependencies): HashedPassword {
-    if (value instanceof HashedPassword) {
-      return new HashedPassword(value.value);
+  public static create(input: HashedPasswordCreateValue, { parser }: HashedPasswordCreateDependencies): HashedPassword {
+    if (input instanceof HashedPassword) {
+      return new HashedPassword(input.value);
     }
-    const parsedValue = parser.parse(value);
+    const parsedValue = parser.parse(input);
 
     return new HashedPassword(parsedValue);
   }
-  public static unsafeCreate(value: HashedPasswordValue): HashedPassword {
-    return new HashedPassword(value);
+  public static unsafeCreate(validValue: HashedPasswordValue): HashedPassword {
+    return new HashedPassword(validValue);
   }
 
   public get value() { return this._value; }
@@ -22,7 +22,7 @@ export class HashedPassword {
 
 export type HashedPasswordValue = string
 
-export type HashedPasswordCreateValue = string | HashedPassword
+export type HashedPasswordCreateValue = HashedPasswordParserInput | HashedPassword
 
 export type HashedPasswordCreateDependencies = {
   parser: IHashedPasswordParser;

@@ -1,4 +1,6 @@
 import type { IParser } from "./__IParser";
-import type { CPF, CpfCreateValue } from "@/domain/value-objects/CPF";
+import type { CpfValue } from "@/domain/value-objects/CPF";
 
-export interface ICpfParser extends IParser<CpfCreateValue, CPF['_value']> {}
+export type CpfParserInput = string
+
+export interface ICpfParser extends IParser<CpfParserInput, CpfValue> {}

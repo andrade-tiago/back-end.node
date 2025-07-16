@@ -1,15 +1,15 @@
-import type { INonFutureDatetimeParser } from "@/domain/parsers/INonFutureDatetimeParser";
+import type { INonFutureDatetimeParser, NonFutureDatetimeParserInput } from "@/domain/parsers/INonFutureDatetimeParser";
 
 export class NonFutureDatetime {
   private constructor(
     private readonly _value: NonFutureDatetimeValue,
   ) {}
 
-  public static create(value: NonFutureDatetimeCreateValue, { parser }: NonFutureDatetimeCreateDependencies): NonFutureDatetime {
-    if (value instanceof NonFutureDatetime) {
-      return new NonFutureDatetime(value.value);
+  public static create(input: NonFutureDatetimeCreateValue, { parser }: NonFutureDatetimeCreateDependencies): NonFutureDatetime {
+    if (input instanceof NonFutureDatetime) {
+      return new NonFutureDatetime(input.value);
     }
-    const parsedValue = parser.parse(value);
+    const parsedValue = parser.parse(input);
 
     return new NonFutureDatetime(parsedValue);
   }
@@ -29,7 +29,7 @@ export class NonFutureDatetime {
 
 export type NonFutureDatetimeValue = ReturnType<Date['toISOString']>
 
-export type NonFutureDatetimeCreateValue = ConstructorParameters<typeof Date>[0] | NonFutureDatetime
+export type NonFutureDatetimeCreateValue = NonFutureDatetimeParserInput | NonFutureDatetime
 
 export type NonFutureDatetimeCreateDependencies = {
   parser: INonFutureDatetimeParser;

@@ -1,21 +1,21 @@
-import type { ICpfParser } from "@/domain/parsers/ICpfParser";
+import type { CpfParserInput, ICpfParser } from "@/domain/parsers/ICpfParser";
 
 export class CPF {
   private constructor(
     private readonly _value: CpfValue,
   ) {}
 
-  public static create(value: CpfCreateValue, { parser }: CpfCreateDependencies): CPF {
-    if (value instanceof CPF) {
-      return new CPF(value.value);
+  public static create(input: CpfCreateValue, { parser }: CpfCreateDependencies): CPF {
+    if (input instanceof CPF) {
+      return new CPF(input.value);
     }
 
-    const parsedValue = parser.parse(value);
+    const parsedValue = parser.parse(input);
 
     return new CPF(parsedValue);
   }
-  public static unsafeCreate(value: CpfValue): CPF {
-    return new CPF(value);
+  public static unsafeCreate(validValue: CpfValue): CPF {
+    return new CPF(validValue);
   }
 
   public get value() { return this._value; }
@@ -23,7 +23,7 @@ export class CPF {
 
 export type CpfValue = string
 
-export type CpfCreateValue = string | CPF
+export type CpfCreateValue = CpfParserInput | CPF
 
 export type CpfCreateDependencies = {
   parser: ICpfParser;

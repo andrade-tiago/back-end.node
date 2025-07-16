@@ -1,4 +1,6 @@
 import type { IParser } from "./__IParser";
-import type { MoneyCreateValue, MoneyValue } from "@/domain/value-objects/Money";
+import type { MoneyValue } from "@/domain/value-objects/Money";
 
-export interface IMoneyParser extends IParser<MoneyCreateValue, MoneyValue> {}
+export type MoneyParserInput = number
+
+export interface IMoneyParser extends IParser<MoneyParserInput, MoneyValue> {}
