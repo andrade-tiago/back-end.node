@@ -1,3 +1,3 @@
-export interface IParser<TOutput> {
-  parse(value: unknown): TOutput;
+export interface IParser<TInput, TOutput> {
+  parse(value: TInput): TOutput;
 }

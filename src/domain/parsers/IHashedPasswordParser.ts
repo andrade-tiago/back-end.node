@@ -1,4 +1,4 @@
 import type { IParser } from "./__IParser";
-import type { HashedPassword } from "@/domain/value-objects/HashedPassword";
+import type { HashedPassword, HashedPasswordCreateValue } from "@/domain/value-objects/HashedPassword";
 
-export interface IHashedPasswordParser extends IParser<HashedPassword['_value']> {}
+export interface IHashedPasswordParser extends IParser<HashedPasswordCreateValue, HashedPassword['_value']> {}

@@ -1,4 +1,4 @@
 import type { IParser } from "./__IParser";
-import type { ProductTitle } from "@/domain/value-objects/ProductTitle";
+import type { ProductTitle, ProductTitleCreateValue } from "@/domain/value-objects/ProductTitle";
 
-export interface IProductTitleParser extends IParser<ProductTitle['_value']> {}
+export interface IProductTitleParser extends IParser<ProductTitleCreateValue, ProductTitle['_value']> {}
