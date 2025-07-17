@@ -6,6 +6,7 @@
   "author": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --project tsconfig.prod.json",
     "test": "vitest",
     "watch": "tsc --noEmit --watch"
   },
