@@ -10,8 +10,4 @@
   "include": [
     "src/**/*"
   ],
-  "exclude": [
-    "src/**/*.fake.ts",
-    "src/**/*.test.ts"
-  ]
 }
