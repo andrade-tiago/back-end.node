@@ -1,0 +1,20 @@
+{
+  "cSpell.userWords": [
+    "Datetimes"
+  ],
+  "material-icon-theme.files.associations": {
+    "*.mock.ts": "test-jsx"
+  },
+  "material-icon-theme.folders.associations": {
+    "domain": "template",
+    "dtos": "pipe",
+    "entities": "class",
+    "factories": "generator",
+    "implementations": "context",
+    "infra": "context",
+    "mappers": "mappings",
+    "parsers": "resolver",
+    "use-cases": "layout",
+    "value-objects": "plugin"
+  }
+}
