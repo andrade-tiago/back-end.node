@@ -11,13 +11,14 @@ import { mockEmailAddress } from "@/domain/value-objects/EmailAddress.mock";
 import { mockHashedPassword } from "@/domain/value-objects/HashedPassword.mock";
 import { mockUserRole } from "@/domain/enums/UserRole.mock";
 import { NonFutureDatetime } from "@/domain/value-objects/NonFutureDatetime";
+import { ConflictError } from "@/domain/errors";
 
 describe('DeletedUser Entity', () =>
 {
   const validProps: DeletedUserProps = {
     id: mockUuid(),
     createdAt: mockNonFutureDatetime(),
-    deletedAt: mockNonFutureDatetime(),
+    deletedAt: NonFutureDatetime.now(),
   };
 
   it('should create a deleted user successfully', () =>
@@ -49,12 +50,26 @@ describe('DeletedUser Entity', () =>
     });
 
     const now = mockNonFutureDatetime();
-    vi.spyOn(NonFutureDatetime, 'now').mockReturnValue(now);
+    const spy = vi.spyOn(NonFutureDatetime, 'now').mockReturnValue(now);
 
     const deletedUser = DeletedUser.fromActiveUser(activeUser);
 
     expect(deletedUser.id).toBe(activeUser.id);
     expect(deletedUser.createdAt).toBe(activeUser.createdAt);
     expect(deletedUser.deletedAt).toBe(now);
+
+    spy.mockRestore();
+  });
+
+  it('should throw if deletion datetime is earlier than creation datetime', () =>
+  {
+    expect(() =>
+    {
+      DeletedUser.create({
+        id: validProps.id,
+        createdAt: NonFutureDatetime.now(),
+        deletedAt: mockNonFutureDatetime(),
+      });
+    }).toThrow(ConflictError);
   });
 });
