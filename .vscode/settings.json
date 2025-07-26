@@ -3,7 +3,7 @@
     "Datetimes"
   ],
   "material-icon-theme.files.associations": {
-    "*.mock.ts": "test-jsx"
+    "*.mock.ts": "test-js"
   },
   "material-icon-theme.folders.associations": {
     "domain": "template",
