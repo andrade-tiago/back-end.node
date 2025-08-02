@@ -1,20 +1,27 @@
 import type { IHashedPasswordParser, HashedPasswordParserInput } from '@/domain/parsers/IHashedPasswordParser';
+import type { Password } from './Password';
+import type { IPasswordHasherService } from '@/domain/services/IPasswordHasherService';
 import { HashedPassword, type HashedPasswordValue } from './HashedPassword';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { InvalidDataError } from '@/domain/errors';
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { mockPassword } from './Password.mock';
 import { faker } from '@faker-js/faker';
+import { InvalidDataError } from '@/domain/errors';
 
 describe('HashedPassword Value Object', () =>
 {
   const validTestInput: HashedPasswordParserInput = faker.internet.password();
   const invalidTestInput: HashedPasswordParserInput = faker.string.numeric();
   const testParserOutput: HashedPasswordValue = faker.string.alphanumeric(60);
+  
+  const pass: Password = mockPassword();  
 
   let parser: IHashedPasswordParser;
+  let hasher: IPasswordHasherService;
 
   beforeEach(() =>
   {
-    parser = {
+    parser =
+    {
       parse: vi.fn<IHashedPasswordParser['parse']>((value) =>
       {
         if (value === validTestInput)
@@ -24,6 +31,15 @@ describe('HashedPassword Value Object', () =>
         throw new InvalidDataError('Invalid password');
       }),
     };
+    hasher =
+    {
+      hash: vi.fn<IPasswordHasherService['hash']>(async (value) => testParserOutput),
+      compare: async (pass, hashed) => true
+    }
+  });
+  afterEach(() =>
+  {
+    vi.clearAllMocks();
   });
 
   it('should create HashedPassword using parser', () =>
@@ -44,6 +60,14 @@ describe('HashedPassword Value Object', () =>
     expect(result).not.toBe(original);
     expect(result.value).toBe(original.value);
     expect(parser.parse).not.toHaveBeenCalled();
+  });
+
+  it('should create a HashedPassword through Password', async () =>
+  {
+    const result = await HashedPassword.fromPassword(pass, { hasher });
+
+    expect(result.value).toBe(testParserOutput);
+    expect(hasher.hash).toHaveBeenCalledTimes(1);
   });
 
   it('should throw if parser throws', () =>

@@ -1,4 +1,6 @@
 import type { HashedPasswordParserInput, IHashedPasswordParser } from "@/domain/parsers/IHashedPasswordParser";
+import type { IPasswordHasherService } from "@/domain/services/IPasswordHasherService";
+import type { Password } from "./Password";
 
 export class HashedPassword {
   private constructor(
@@ -13,6 +15,11 @@ export class HashedPassword {
 
     return new HashedPassword(parsedValue);
   }
+  public static async fromPassword(password: Password, { hasher }: HashedPasswordFromPasswordDependencies): Promise<HashedPassword> {
+    const passwordHash: string = await hasher.hash(password.value);
+
+    return new HashedPassword(passwordHash);
+  }
   public static unsafeCreate(validValue: HashedPasswordValue): HashedPassword {
     return new HashedPassword(validValue);
   }
@@ -26,4 +33,8 @@ export type HashedPasswordCreateValue = HashedPasswordParserInput | HashedPasswo
 
 export type HashedPasswordCreateDependencies = {
   parser: IHashedPasswordParser;
+}
+
+export type HashedPasswordFromPasswordDependencies = {
+  hasher: IPasswordHasherService;
 }
