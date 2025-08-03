@@ -3,6 +3,6 @@ import type {
   NonFutureDatetimeCreateValue,
 } from "@/domain/value-objects/NonFutureDatetime";
 
-export interface INonFutureDateFactory {
+export interface INonFutureDatetimeFactory {
   create(datetime: NonFutureDatetimeCreateValue): NonFutureDatetime;
 }
