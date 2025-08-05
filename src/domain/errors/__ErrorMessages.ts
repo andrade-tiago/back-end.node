@@ -7,6 +7,8 @@ export const ErrorMessages = {
     InvalidCpf: (cpf: string) => `CPF "${cpf}" is invalid`,
     InvalidEmail: (email: string) => `E-mail "${email}" is invalid`,
     InvalidRole: (role: string) => `"${role}" is an invalid role`,
+    InvalidPassword:
+      'A password must contain 8-24 characters, including number, lower and upper case letters and especial characters',
   },
 
   NonEncryptedString: (str: string) => `Non encrypted string "${str}"`,
