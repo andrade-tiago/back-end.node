@@ -1,4 +1,4 @@
-import type { EmailAddressParserInput, IEmailParser } from "@/domain/parsers/IEmailAddressParser";
+import type { EmailAddressParserInput, IEmailAddressParser } from "@/domain/parsers/IEmailAddressParser";
 
 export class EmailAddress {
   private constructor(
@@ -25,5 +25,5 @@ export type EmailAddressValue = string
 export type EmailAddressCreateValue = EmailAddressParserInput | EmailAddress
 
 export type EmailAddressCreateDependencies = {
-  parser: IEmailParser;
+  parser: IEmailAddressParser;
 }

@@ -1,4 +1,4 @@
-import type { EmailAddressParserInput, IEmailParser } from "@/domain/parsers/IEmailAddressParser";
+import type { EmailAddressParserInput, IEmailAddressParser } from "@/domain/parsers/IEmailAddressParser";
 import { EmailAddress, type EmailAddressValue } from "./EmailAddress";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { InvalidDataError } from "@/domain/errors";
@@ -10,13 +10,13 @@ describe('EmailAddress Value Object', () =>
   const invalidTestInput: EmailAddressParserInput = faker.string.numeric();
   const testParserOutput: EmailAddressValue = faker.internet.email();
 
-  let parser: IEmailParser;
+  let parser: IEmailAddressParser;
 
   beforeEach(() =>
   {
     parser =
     {
-      parse: vi.fn<IEmailParser['parse']>((value) =>
+      parse: vi.fn<IEmailAddressParser['parse']>((value) =>
       {
         if (value === validTestInput)
         {

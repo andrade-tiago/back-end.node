@@ -3,4 +3,4 @@ import type { EmailAddressValue } from "@/domain/value-objects/EmailAddress";
 
 export type EmailAddressParserInput = string
 
-export interface IEmailParser extends IParser<EmailAddressParserInput, EmailAddressValue> {}
+export interface IEmailAddressParser extends IParser<EmailAddressParserInput, EmailAddressValue> {}
