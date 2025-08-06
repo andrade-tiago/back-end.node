@@ -14,11 +14,8 @@ export class CpfParser implements ICpfParser
       {
         return unformattedValue;
       }
-      throw new Error();
-    }
-    catch
-    {
-      throw new InvalidDataError(ErrorMessages.User.InvalidCpf(value));
-    }
+    } catch {}
+
+    throw new InvalidDataError(ErrorMessages.User.InvalidCpf(value));
   }
 }
