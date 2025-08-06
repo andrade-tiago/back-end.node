@@ -4,7 +4,7 @@ import { ErrorMessages, InvalidDataError } from "@/domain/errors";
 
 export class EmailAddressParser implements IEmailAddressParser
 {
-  private schema: z.ZodString;
+  private schema: z.ZodSchema;
 
   public constructor()
   {

@@ -4,7 +4,7 @@ import { ErrorMessages, InvalidDataError } from "@/domain/errors";
 
 export class PasswordParser implements IPasswordParser
 {
-  private _schema: z.ZodString;
+  private _schema: z.ZodSchema;
 
   public constructor()
   {

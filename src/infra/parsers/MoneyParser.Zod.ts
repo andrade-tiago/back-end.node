@@ -1,10 +1,10 @@
 import type { IMoneyParser } from "@/domain/parsers/IMoneyParser";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { ErrorMessages, InvalidDataError } from "@/domain/errors";
 
 export class MoneyParser implements IMoneyParser
 {
-  private readonly schema;
+  private readonly schema: z.ZodSchema;
 
   public constructor()
   {
@@ -35,7 +35,7 @@ export class MoneyParser implements IMoneyParser
     }
     catch(error)
     {
-      const errorMsg = error instanceof ZodError
+      const errorMsg = error instanceof z.ZodError
         ? error.message
         : ErrorMessages.Number.NonNumeric;
 

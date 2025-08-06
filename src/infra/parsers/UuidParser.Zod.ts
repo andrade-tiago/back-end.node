@@ -4,7 +4,7 @@ import { ErrorMessages, InvalidDataError } from "@/domain/errors";
 
 export class UuidParser implements IUuidParser
 {
-  private schema: z.ZodString;
+  private schema: z.ZodSchema;
 
   public constructor()
   {
