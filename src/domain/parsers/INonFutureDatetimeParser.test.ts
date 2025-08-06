@@ -26,9 +26,9 @@ export function testNonFutureDatetimeParser(opt: TestOptions)
       vi.useRealTimers();
     });
 
-    describe('should return valid non-future datetimes as ISO strings', () =>
+    describe('should return valid non-future datetime representations as ISO strings', () =>
     {
-      const pastOrPresentDatetimes: Array<[NonFutureDatetimeParserInput, NonFutureDatetimeValue]> =
+      const nonFutureDatetimes: Array<[NonFutureDatetimeParserInput, NonFutureDatetimeValue]> =
       [
         // Date objects
         [new Date('2023-10-26T09:59:59.000Z'), '2023-10-26T09:59:59.000Z'],
@@ -37,59 +37,62 @@ export function testNonFutureDatetimeParser(opt: TestOptions)
 
         // String inputs
         ['2023-10-26T09:59:00.000Z', '2023-10-26T09:59:00.000Z'],
-        ['2020-05-15', '2020-05-15T03:00:00.000Z'],
-        ['October 26, 2023 09:58:00 GMT-0300', '2023-10-26T12:58:00.000Z'],
+        ['2020-05-15', '2020-05-15T00:00:00.000Z'],
+        ['October 25, 2023 09:58:00 GMT-0300', '2023-10-25T12:58:00.000Z'],
 
         // Number inputs
         [MOCKED_NOW.getTime() - 1000, '2023-10-26T09:59:59.000Z'],
         [MOCKED_NOW.getTime(), '2023-10-26T10:00:00.000Z'],
       ];
 
-      test.each(pastOrPresentDatetimes)('test: %s => %s', (input, expectedResult) =>
+      test.each(nonFutureDatetimes)('test: %s => %s', (input, expectedResult) =>
       {
         expect(instance.parse(input)).toBe(expectedResult);
       });
     });
 
-    describe('should throw an error for future datetimes', () =>
+    describe('should throw', () =>
     {
-      const futureDatetimes: NonFutureDatetimeParserInput[] =
-      [
-        // Date objects
-        new Date('2023-10-26T10:00:00.001Z'),
-        new Date('2023-10-26T10:00:01.000Z'),
-        new Date('2024-01-01T00:00:00.000Z'),
-
-        // String inputs
-        '2023-10-26T10:00:00.001Z',
-        '2024-01-01',
-
-        // Number inputs
-        MOCKED_NOW.getTime() + 1,
-        MOCKED_NOW.getTime() + 60000,
-      ];
-
-      test.each(futureDatetimes)('test: %s', (input) =>
+      describe('should throw an error for future datetime representations', () =>
       {
-        expect(() => instance.parse(input)).toThrow(InvalidDataError);
+        const futureDatetimes: NonFutureDatetimeParserInput[] =
+        [
+          // Date objects
+          new Date('2023-10-26T10:00:00.001Z'),
+          new Date('2023-10-26T10:00:01.000Z'),
+          new Date('2024-01-01T00:00:00.000Z'),
+  
+          // String inputs
+          '2023-10-26T10:00:00.001Z',
+          '2024-01-01',
+  
+          // Number inputs
+          MOCKED_NOW.getTime() + 1,
+          MOCKED_NOW.getTime() + 60000,
+        ];
+  
+        test.each(futureDatetimes)('test: %s', (input) =>
+        {
+          expect(() => instance.parse(input)).toThrow(InvalidDataError);
+        });
       });
-    });
-
-    describe('should throw an error for invalid input values', () =>
-    {
-      const invalidInputs: NonFutureDatetimeParserInput[] =
-      [
-        'invalid date string',
-        Number.NaN,
-        Number.POSITIVE_INFINITY,
-        Number.NEGATIVE_INFINITY,
-        '999999999999999999999',
-        new Date(Number.NaN),
-      ];
-
-      test.each(invalidInputs)('test: %s', (input) =>
+  
+      describe('should throw an error for invalid input values', () =>
       {
-        expect(() => instance.parse(input)).toThrow(InvalidDataError);
+        const invalidInputs: NonFutureDatetimeParserInput[] =
+        [
+          'invalid date string',
+          Number.NaN,
+          Number.POSITIVE_INFINITY,
+          Number.NEGATIVE_INFINITY,
+          '999999999999999999999',
+          new Date(Number.NaN),
+        ];
+  
+        test.each(invalidInputs)('test: %s', (input) =>
+        {
+          expect(() => instance.parse(input)).toThrow(InvalidDataError);
+        });
       });
     });
   });
