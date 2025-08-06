@@ -36,7 +36,7 @@ export class MoneyParser implements IMoneyParser
     catch(error)
     {
       const errorMsg = error instanceof z.ZodError
-        ? error.message
+        ? error.issues[0].message
         : ErrorMessages.Number.NonNumeric;
 
       throw new InvalidDataError(errorMsg);
