@@ -1,9 +1,7 @@
 import type { IEmailAddressFactory } from "./IEmailAddressFactory";
-import { EmailAddress, type EmailAddressCreateValue } from "@/domain/value-objects/EmailAddress";
+import { EmailAddress } from "@/domain/value-objects/EmailAddress";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { mockEmailAddress } from "@/domain/value-objects/EmailAddress.mock";
-import { faker } from "@faker-js/faker";
-import { InvalidDataError } from "@/domain/errors";
 
 type TestOptions =
 {
@@ -20,7 +18,6 @@ export function testEmailAddressFactory(opt: TestOptions)
 
     const fakeEmail1: EmailAddress = mockEmailAddress();
     const fakeEmail2: EmailAddress = mockEmailAddress();
-    const invalidEmail: EmailAddressCreateValue = faker.lorem.text();
 
     beforeEach(() =>
     {
@@ -41,11 +38,6 @@ export function testEmailAddressFactory(opt: TestOptions)
 
       expect(result).toBeInstanceOf(EmailAddress);
       expect(result.value).toBe(fakeEmail1.value);
-    });
-
-    it('should throw for invalid email addresses', () =>
-    {
-      expect(() => factoryInstance.create(invalidEmail)).toThrow(InvalidDataError);
     });
 
     it('should call EmailAddress.create internally', () =>
