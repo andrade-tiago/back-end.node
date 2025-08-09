@@ -1,8 +1,7 @@
 import type { ICpfFactory } from "./ICpfFactory";
-import { CPF, type CpfCreateValue } from "@/domain/value-objects/CPF";
+import { CPF } from "@/domain/value-objects/CPF";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { mockCPF } from "@/domain/value-objects/CPF.mock";
-import { faker } from "@faker-js/faker";
 
 type TestOptions = {
   getInstanceFunc: () => ICpfFactory;
@@ -18,7 +17,6 @@ export function testCpfFactory(opt: TestOptions)
 
     const fakeCPF1: CPF = mockCPF();
     const fakeCPF2: CPF = mockCPF();
-    const invalidCPF: CpfCreateValue = faker.color.human();
 
     beforeEach(() =>
     {
