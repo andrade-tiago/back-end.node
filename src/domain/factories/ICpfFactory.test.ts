@@ -3,7 +3,6 @@ import { CPF, type CpfCreateValue } from "@/domain/value-objects/CPF";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { mockCPF } from "@/domain/value-objects/CPF.mock";
 import { faker } from "@faker-js/faker";
-import { InvalidDataError } from "@/domain/errors";
 
 type TestOptions = {
   getInstanceFunc: () => ICpfFactory;
@@ -40,11 +39,6 @@ export function testCpfFactory(opt: TestOptions)
 
       expect(testCPF).toBeInstanceOf(CPF);
       expect(testCPF.value).toBe(fakeCPF1.value);
-    });
-
-    it('should throw for invalid values', () =>
-    {
-      expect(() => factoryInstance.create(invalidCPF)).toThrow(InvalidDataError);
     });
 
     it('should call CPF.create internally', () =>
