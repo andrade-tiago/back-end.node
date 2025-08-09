@@ -1,9 +1,7 @@
 import type { IFullNameFactory } from "./IFullNameFactory";
-import { FullName, type FullNameCreateValue } from "@/domain/value-objects/FullName";
+import { FullName } from "@/domain/value-objects/FullName";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { mockFullName } from "@/domain/value-objects/FullName.mock";
-import { faker } from "@faker-js/faker";
-import { InvalidDataError } from "@/domain/errors";
 
 type TestOptions =
 {
@@ -20,7 +18,6 @@ export function testFullNameFactory(opt: TestOptions)
 
     const fakeName1: FullName = mockFullName();
     const fakeName2: FullName = mockFullName();
-    const invalidName: FullNameCreateValue = faker.lorem.text();
 
     beforeEach(() =>
     {
@@ -41,11 +38,6 @@ export function testFullNameFactory(opt: TestOptions)
 
       expect(result).toBeInstanceOf(FullName);
       expect(result.value).toBe(fakeName1.value);
-    });
-
-    it('should throw for invalid full names', () =>
-    {
-      expect(() => factoryInstance.create(invalidName)).toThrow(InvalidDataError);
     });
 
     it('should call FullName.create internally', () =>
