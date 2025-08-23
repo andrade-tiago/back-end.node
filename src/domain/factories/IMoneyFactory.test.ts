@@ -45,7 +45,12 @@ export function testMoneyFactory(opt: TestOptions)
 
     it('should throw for invalid values', () =>
     {
+      const spy = vi.spyOn(Money, 'create')
+        .mockImplementation(() => { throw new InvalidDataError('') });
+
       expect(() => factoryInstance.create(invalidValue)).toThrow(InvalidDataError);
+
+      spy.mockRestore();
     });
 
     it('should call Money.create internally', () =>
