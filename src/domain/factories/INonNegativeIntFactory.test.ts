@@ -19,7 +19,7 @@ export function testNonNegativeIntFactory(opt: TestOptions)
 
     const fakeInstance1: NonNegativeInt = mockNonNegativeInt();
     const fakeInstance2: NonNegativeInt = mockNonNegativeInt();
-    const invalidValue: NonNegativeIntCreateValue = faker.number.int({ max: -1 });
+    const invalidValue: NonNegativeIntCreateValue = faker.number.int({ min: -10, max: -1 });
 
     beforeEach(() =>
     {
@@ -44,7 +44,12 @@ export function testNonNegativeIntFactory(opt: TestOptions)
 
     it('should throw for invalid values', () =>
     {
+      const spy = vi.spyOn(NonNegativeInt, 'create')
+        .mockImplementation(() => { throw new InvalidDataError('') });
+
       expect(() => factoryInstance.create(invalidValue)).toThrow(InvalidDataError);
+
+      spy.mockRestore();
     });
 
     it('should call NonNegativeInt.create internally', () =>
