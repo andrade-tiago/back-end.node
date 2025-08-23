@@ -61,7 +61,12 @@ export function testNonFutureDatetimeFactory(opt: TestOptions)
 
     it('should throw for invalid values', () =>
     {
+      const spy = vi.spyOn(NonFutureDatetime, 'create')
+        .mockImplementation(() => { throw new InvalidDataError('') });
+
       expect(() => factoryInstance.create(invalidValue)).toThrow(InvalidDataError);
+
+      spy.mockRestore();
     });
 
     it('should call NonFutureDatetime.create internally', () =>
