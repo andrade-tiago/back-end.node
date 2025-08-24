@@ -44,7 +44,12 @@ export function testPositiveIntFactory(opt: TestOptions)
 
     it('should throw for invalid values', () =>
     {
+      const spy = vi.spyOn(PositiveInt, 'create')
+        .mockImplementation(() => { throw new InvalidDataError('') });
+
       expect(() => factoryInstance.create(invalidValue)).toThrow(InvalidDataError);
+
+      spy.mockRestore();
     });
 
     it('should call PositiveInt.create internally', () =>
