@@ -45,7 +45,12 @@ export function testPasswordFactory(opt: TestOptions)
 
     it('should throw for invalid full names', () =>
     {
+      const spy = vi.spyOn(Password, 'create')
+        .mockImplementation(() => { throw new InvalidDataError('') });
+
       expect(() => factoryInstance.create(invalidPassValue)).toThrow(InvalidDataError);
+
+      spy.mockRestore();
     });
 
     it('should call Password.create internally', () =>
