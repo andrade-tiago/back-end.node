@@ -44,7 +44,12 @@ export function testUuidFactory(opt: TestOptions)
 
     it('should throw for invalid values', () =>
     {
+      const spy = vi.spyOn(Uuid, 'create')
+        .mockImplementation(() => { throw new InvalidDataError('') });
+
       expect(() => factoryInstance.create(invalidValue)).toThrow(InvalidDataError);
+
+      spy.mockRestore();
     });
 
     it('should call Uuid.create internally', () =>
