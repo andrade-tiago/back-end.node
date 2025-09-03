@@ -1,6 +1,7 @@
 {
   "cSpell.userWords": [
-    "Datetimes"
+    "Datetimes",
+    "dtos" // lowercase acronym of Data Transfer Objects
   ],
   "material-icon-theme.files.associations": {
     "*.mock.ts": "test-js",
