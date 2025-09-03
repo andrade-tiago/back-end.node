@@ -3,7 +3,9 @@
     "Datetimes"
   ],
   "material-icon-theme.files.associations": {
-    "*.mock.ts": "test-js"
+    "*.mock.ts": "test-js",
+
+    "tsconfig.prod.json": "tsconfig" // unfortunately "tsconfig.*.json" does not work.
   },
   "material-icon-theme.folders.associations": {
     "domain": "template",
